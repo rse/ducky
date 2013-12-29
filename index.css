@@ -1,0 +1,202 @@
+
+body {
+    font-family: "Open Sans";
+    font-size: 11pt;
+    background-color: #e0e0e0;
+}
+
+.canvas {
+    width: 100%;
+    position: relative;
+}
+
+.canvas .pagination {
+    z-index: 100;
+    position: absolute;
+    left: 0px;
+    width: 100%;
+    text-align: center;
+    bottom: 5px;
+}
+.swiper-pagination-switch {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 10px;
+    background: #999999;
+    box-shadow: 0px 1px 2px #000000 inset;
+    margin: 0 3px;
+    cursor: pointer;
+    opacity: 0.6;
+}
+.swiper-active-switch {
+    background: #ffffff;
+}
+
+.swiper-container, .swiper-slide {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide.slide1 {
+}
+.swiper-slide.slide2 {
+}
+.swiper-slide.slide3 {
+}
+
+.canvas .icons {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+}
+.canvas .icons .fa-arrow-circle-left {
+    z-index: 100;
+    position: absolute;
+    left: 10px;
+    top: 40%;
+    color: #c0c0c0;
+    opacity: 0.5;
+    font-size: 50px;
+}
+.canvas .icons .fa-arrow-circle-right {
+    z-index: 100;
+    position: absolute;
+    right: 10px;
+    top: 40%;
+    color: #c0c0c0;
+    opacity: 0.5;
+    font-size: 50px;
+}
+
+.logo {
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    z-index: 200;
+}
+.banner {
+    position: absolute;
+    top: 100px;
+    left: 0px;
+    width: auto;
+    padding: 10px 50px 10px 300px;
+    color: #ffffff;
+    background-color: #e06000;
+    font-size: 50px;
+    font-weight: 800;
+    letter-spacing: -2px;
+    text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.8);
+    -webkit-border-top-right-radius: 8px;
+    -webkit-border-bottom-right-radius: 8px;
+    -moz-border-radius-topright: 8px;
+    -moz-border-radius-bottomright: 8px;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    // -webkit-box-shadow: 0px 2px 6px 0px #999999;
+    // box-shadow: 0px 2px 6px 0px #999999;
+}
+.content {
+    position: relative;
+    top: 250px;
+}
+.sample {
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    border: 1px solid #cccccc;
+    padding: 10px;
+    -webkit-box-shadow: 0px 0px 8px 0px #e0e0e0;
+    box-shadow: 0px 0px 8px 0px #e0e0e0;
+    background-color: #f8f8f8;
+}
+.sample pre {
+    padding: 0px;
+    margin: 0px;
+    font-family: "Menlo";
+    font-size: 10pt;
+}
+.pitch {
+    position: relative;
+    top: 100px;
+    font-size: 14pt;
+    padding-right: 100px;
+}
+
+.terminal {
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    border: 1px solid #cccccc;
+    padding: 10px;
+    -webkit-box-shadow: 0px 0px 8px 0px #e0e0e0;
+    box-shadow: 0px 0px 8px 0px #e0e0e0;
+    background-color: #333333;
+}
+.terminal pre {
+    padding: 0px;
+    margin: 0px;
+    font-family: "Menlo";
+    font-size: 10pt;
+    color: #ffffff;
+}
+
+/* ======= */
+
+pre {
+    color: #222222;
+}
+
+pre .comment,
+pre .template_comment,
+pre .javadoc,
+pre .comment * {
+  color: #999999;
+  font-style: italic;
+}
+
+pre .keyword,
+pre .ruby .function .keyword,
+pre .function .keyword,
+pre .sub .keyword,
+pre .method,
+pre .list .title,
+pre .tag .title,
+pre .setting .value,
+pre .winutils,
+pre .tex .command {
+  color: #333333;
+  font-weight: bold;
+}
+
+pre .string,
+pre .tag .value,
+pre .cdata,
+pre .filter .argument,
+pre .attr_selector,
+pre .apache .cbracket,
+pre .date,
+pre .regexp,
+pre .sub .identifier,
+pre .pi,
+pre .tag,
+pre .tag .keyword,
+pre .decorator,
+pre .ini .title,
+pre .shebang,
+pre .input_number,
+pre .hexcolor,
+pre .rules .value,
+pre .css .value .number,
+pre .literal,
+pre .symbol,
+pre .ruby .symbol .string,
+pre .ruby .symbol .keyword,
+pre .ruby .symbol .keymethods,
+pre .number,
+pre .css .function {
+  color: #e06000;
+}
+

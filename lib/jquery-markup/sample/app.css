@@ -1,0 +1,18 @@
+
+/*  style container  */
+.hello {
+    padding: 10px;
+    border: 1px solid blue;
+}
+
+/*  style message  */
+.hello .message {
+    color: blue;
+}
+.hello .message.row-0 {
+    background-color: #f0f0f0;
+}
+.hello .message.row-1 {
+    background-color: inherit;
+}
+

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" data-framework="componentjs">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Ducky</title>
+        <script src="lib/lodash/dist/lodash.js" type="text/javascript"></script>
+        <script src="lib/nunjucks/browser/nunjucks.js" type="text/javascript"></script>
+        <script src="lib/jquery/jquery.js" type="text/javascript"></script>
+        <script src="lib/jquery-markup/jquery.markup.js" type="text/javascript"></script>
+        <script src="lib/director/build/director.js" type="text/javascript"></script>
+        <script src="lib/swiper/dist/idangerous.swiper-2.4.1.js" type="text/javascript"></script>
+        <script src="lib/swiper/plugins/scrollbar/idangerous.swiper.scrollbar.js" type="text/javascript"></script>
+        <script src="lib/swiper/plugins/smooth-progress/idangerous.swiper.progress.js" type="text/javascript"></script>
+        <script src="lib/swiper/plugins/hash-navigation/idangerous.swiper.hashnav.js" type="text/javascript"></script>
+        <script src="lib/highlightjs/highlight.pack.js" type="text/javascript"></script>
+        <link href="lib/sanitize.css/sanitize.css" rel="stylesheet" type="text/css"/>
+        <link href="lib/open-sans-fontface/open-sans.css" rel="stylesheet" type="text/css"/>
+        <link href="lib/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
+        <link href="lib/swiper/dist/idangerous.swiper.css" rel="stylesheet" type="text/css"/>
+        <link href="lib/gridless/predef/eg12.css" rel="stylesheet" type="text/css"/>
+        <link href="index.css" rel="stylesheet" type="text/css"/>
+        <script src="index.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <div class="canvas">
+            <div class="g-row">
+                <div class="g-col-1-2" style="height: 250px;">
+                    <img class="logo" src="ducky.png" alt=""/>
+                    <div class="banner">Ducky</div>
+                </div>
+                <div class="g-col-1-2" style="height: 250px;">
+                    <div class="pitch">
+                        Ducky is a small Open-Source JavaScript library,
+                        providing Duck-Typed Value Validation, Value Selection
+                        and Flexible Function Parameter Handling.
+                    </div>
+                </div>
+            </div>
+            <div class="g-row">
+                <div class="g-col-2-2">
+
+                    <div class="swiper-container" style="height: 600px;">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide slide1" data-hash="example-validate"> 
+
+                                <div class="g-row">
+                                    <div class="g-off-1-12 g-col-10-12">
+                                        <b>Example Usage: Object Deep Validation</b>
+                                    </div>
+                                </div>
+                                <p/>
+                                <div class="g-row">
+                                    <div class="g-off-1-12 g-col-6-12">
+<div class="sample"><pre class="highlight language-javascript">
+var config = {
+    foo: "TheFoo",
+    bar: [ "TheBar", true, 1, 7, 42 ],
+    quux: [
+        { id: 1, name: "One", enabled: true }, 
+        { id: 2, name: "Two" }, 
+        { id: 3, name: "Three" },
+        { id: 4, name: "Four" }
+        { id: 5, name: "Five" }
+    ]
+};</pre></div>
+<div class="sample"><pre class="highlight language-javascript">
+ducky.validate(config,
+    "{" +
+    "  foo: string," +
+    "  bar: [" +
+    "      string," +
+    "      boolean{0,2}," +
+    "      number+" +
+    "  ]," +
+    "  quux: [ {" +
+    "      id: number," +
+    "      name: string," +
+    "      enabled?: boolean," +
+    "  }* ]" +
+    "}"
+) // &rarr; true;
+</pre></div>
+                                    </div>
+                                    <div class="g-col-3-12" style="padding-left: 40px;">
+                                        Let's define an arbitrary complex
+                                        JavaScript object graph
+                                        and then assume you get this object graph as
+                                        input and you want to sanity check its structure
+                                        and typing before working with it.
+
+                                        <p/>
+                                        Ducky uses a validation syntax which is a mixture of 
+                                        JavaScript Object Notation (for the structure) and
+                                        Regular Expressions (for the arities).
+
+                                        <p/>
+                                        Ducky is efficient: it compiles the validation specification
+                                        into an Abstract Syntax Tree (AST), caches
+                                        this AST for potential subsequent validations
+                                        and executes this AST against the
+                                        passed object graph.
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="swiper-slide slide2" data-hash="example-select">
+
+                                <div class="g-row">
+                                    <div class="g-off-1-12 g-col-10-12">
+                                       <b>Example Usage: Object Deep Selection</b>
+                                    </div>
+                                </div>
+                                <p/>
+                                <div class="g-row">
+                                    <div class="g-off-1-12 g-col-6-12">
+<div class="sample"><pre class="highlight language-javascript">
+var config = {
+    foo: "TheFoo",
+    bar: [ "TheBar", true, 1, 7, 42 ],
+    quux: [
+        { id: 1, name: "One", enabled: true }, 
+        { id: 2, name: "Two" }, 
+        { id: 3, name: "Three" },
+        { id: 4, name: "Four" }
+        { id: 5, name: "Five" }
+    ]
+};
+</pre></div>
+                                        <div class="sample"><pre class="highlight language-javascript">
+ducky.select(config, "quux[2].name") // &rarr; "Three"
+ducky.select(config, "quux[2].name", "NewValue") // &rarr; "Three"
+ducky.select(config, "quux.2.name") // &rarr; "NewValue"
+ducky.select(config, "['quux'][2][\"name\"]") // &rarr; "NewValue"
+</pre></div>
+                                    </div>
+                                    <div class="g-col-3-12" style="padding-left: 40px;">
+                                        Let's define the arbitrary complex
+                                        JavaScript object graph again,
+                                        but now deep select various values and get
+                                        or set them.
+
+                                        <p/>
+                                        Ducky uses a selection syntax which follows
+                                        the known JavaScript syntax for object dereferencing
+                                        with the difference that the dot-notation can be
+                                        even used for numeric keys.
+
+                                        <p/>
+                                        Once again, Ducky is efficient: 
+                                        it compiles the selection
+                                        specification into an Abstract Syntax Tree (AST), caches
+                                        this AST for potential subsequent selections
+                                        and executes this AST against the
+                                        passed object graph.
+                                    </div>
+                                 </div>
+                            </div>
+
+                            <div class="swiper-slide slide3" data-hash="example-params">
+
+                                <div class="g-row">
+                                    <div class="g-off-1-12 g-col-10-12">
+                                       <b>Example Usage: Function Parameter Handling</b>
+                                    </div>
+                                </div>
+                                <p/>
+                                <div class="g-row">
+                                    <div class="g-off-1-12 g-col-6-12">
+<div class="sample"><pre class="highlight language-javascript">
+var greet = function () {
+    var params = ducky.params("foo", arguments, {
+        hello: {             def: "Hello", valid: "string" },
+        what:  { pos: 0,     def: "World", valid: "string" },
+        more:  { pos: "...", def: [], valid: "[ number* ]" },
+    });
+    var result = params.hello + " " + params.what;
+    params.more.forEach(function (num) {
+        result += ", " + num;
+    });
+    return result;
+};</pre></div>
+<div class="sample"><pre class="highlight language-javascript">
+greet() &rarr; "Hello World"
+greet("Hackers") &rarr; "Hello Hackers"
+greet({ what: "Hackers" }) &rarr; "Hello Hackers"
+greet("Hackers", 1, 2, 3) &rarr; "Hello Hackers, 1, 2, 3"
+greet({ what: "Hackers", more: [ 1, 2, 3 ] }) &rarr; "Hello Hackers, 1, 2, 3"
+
+greet(42) &rarr; throw Error
+greet("Foo", "Bar") &rarr; throw Error
+</pre></div>
+                                    </div>
+                                    <div class="g-col-3-12" style="padding-left: 40px;">
+                                        Let's define a function which should greet.
+                                        With the help of Ducky its parameter handling
+                                        is both concise and strict.
+
+                                        <p/>
+                                        The parameter handling provided by Ducky support
+                                        positional and named parameters at the same time.
+                                        Additionally, it supports optional parameters (those
+                                        with default values and not in the middle of a list
+                                        of positional parameters), a powerful value
+                                        validation based on <code>Ducky.validate()</code> specifications
+                                        and even the special scenario of rest parameters.
+                                    </div>
+                                 </div>
+
+                            </div>
+                            <div class="swiper-slide slide4" data-hash="download">
+
+                                <div class="g-row">
+                                    <div class="g-off-1-12 g-col-10-12">
+                                       <b>Downloading Ducky</b>
+                                    </div>
+                                </div>
+                                <p/>
+                                <div class="g-row">
+                                    <div class="g-off-1-12 g-col-3-12">
+                                        Via <b>Bower</b> Component Manager:
+                                    </div>
+                                    <div class="g-col-6-12" style="padding-left: 40px;">
+<div class="terminal"><pre>
+$ bower install ducky
+</pre></div>
+                                    </div>
+                                </div>
+                                <p/>
+                                <div class="g-row">
+                                    <div class="g-off-1-12 g-col-3-12">
+                                        Via Node Package Manager (<b>NPM</b>):
+                                    </div>
+                                    <div class="g-col-6-12" style="padding-left: 40px;">
+<div class="terminal"><pre>
+$ npm install ducky
+</pre></div>
+                                    </div>
+                                </div>
+                                <p/>
+                                <div class="g-row">
+                                    <div class="g-off-1-12 g-col-3-12">
+                                        Via <b>Git</b> Version Control System:
+                                    </div>
+                                    <div class="g-col-6-12" style="padding-left: 40px;">
+<div class="terminal"><pre>
+$ git clone https://github.com/rse/ducky.git
+</pre></div>
+                                    </div>
+                                </div>
+                                <p/>
+                                <div class="g-row">
+                                    <div class="g-off-1-12 g-col-3-12">
+                                        Via <b>cURL</b> Client:
+                                    </div>
+                                    <div class="g-col-6-12" style="padding-left: 40px;">
+<div class="terminal"><pre>
+$ curl -O https://raw.github.com/rse/ducky/master/lib/ducky.js
+</pre></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="icons">
+                    <i class="fa fa-arrow-circle-left"></i>
+                    <i class="fa fa-arrow-circle-right"></i>
+                </div>
+                <div class="pagination">
+                </div>
+                <div class="scrollbar">
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

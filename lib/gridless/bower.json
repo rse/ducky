@@ -1,0 +1,21 @@
+{
+    "name": "gridless",
+    "version": "1.0.1",
+    "description": "Grid System for LESS CSS",
+    "main": "grid.less",
+    "homepage": "https://github.com/rse/gridless",
+    "license": "MIT",
+    "authors": [
+        "Ralf S. Engelschall <rse@engelschall.com>"
+    ],
+    "keywords": [
+        "grid", "system", "column", "row", "css", "less"
+    ],
+    "dependencies": {
+        "less": ">=1.4.0"
+    },
+    "ignore": [
+        "**/.*",
+        "bower_components"
+    ]
+}

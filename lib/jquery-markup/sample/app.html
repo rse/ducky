@@ -1,0 +1,12 @@
+
+<!-- container markup template -->
+<markup id="hello">
+   <div class="hello">
+       Welcome:<br/>
+       <!-- embedded message markup template -->
+       <markup id="message">
+           <div class="message row-{{k}}">{{i}}. {{message}}</div>
+       </markup>
+   </div>
+</markup>
+
