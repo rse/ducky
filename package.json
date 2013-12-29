@@ -1,0 +1,40 @@
+{
+    "name":        "validate",
+    "homepage":    "http://github.com/rse/ducky",
+    "description": "Value Duck-Typing for JavaScript",
+    "version":     "2.0.0",
+    "license":     "MIT",
+    "author": {
+        "name":    "Ralf S. Engelschall",
+        "email":   "rse@engelschall.com",
+        "url":     "http://engelschall.com"
+    },
+    "keywords": [
+        "duck", "type", "test", "validate"
+    ],
+    "repository": {
+        "type": "git",
+        "url":  "git://github.com/rse/ducky.git"
+    },
+    "bugs": {
+        "url":  "http://github.com/rse/ducky/issues"
+    },
+    "main": "./lib/ducky.js",
+    "devDependencies": {
+        "grunt":                "~0.4.2",
+        "grunt-cli":            "~0.1.11",
+        "grunt-contrib-jshint": "~0.8.0",
+        "grunt-contrib-uglify": "~0.2.7",
+        "grunt-contrib-clean":  "~0.5.0",
+        "grunt-eslint":         "~0.1.3",
+        "grunt-mocha-test":     "~0.8.1",
+        "grunt-expand-include": "~0.9.6",
+        "chai":                 "~1.8.1",
+        "chai-fuzzy":           "~1.4.0"
+    },
+    "dependencies" : {
+    },
+    "engines": {
+        "node":                 ">=0.8.0"
+    }
+}
