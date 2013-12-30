@@ -23,6 +23,12 @@
 */
 
 interface ducky_api {
+    version: {
+        major: number;
+        minor: number;
+        micro: number;
+        date:  number;
+    };
     validate: {
         (obj: any, spec: string): boolean;
         compile(spec: string): Object;
