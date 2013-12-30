@@ -1,5 +1,5 @@
 /*!
-**  Ducky -- Value Duck-Typing for JavaScript
+**  Ducky -- Duck-Typed Value Handling for JavaScript
 **  Copyright (c) 2010-2013 Ralf S. Engelschall <rse@engelschall.com>
 **
 **  Permission is hereby granted, free of charge, to any person obtaining

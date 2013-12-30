@@ -1,7 +1,7 @@
 {
-    "name":        "validate",
-    "homepage":    "http://github.com/rse/ducky",
-    "description": "Value Duck-Typing for JavaScript",
+    "name":        "ducky",
+    "homepage":    "http://duckyjs.com/",
+    "description": "Duck-Typed Value Handling for JavaScript",
     "version":     "2.0.0",
     "license":     "MIT",
     "author": {
