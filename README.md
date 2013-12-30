@@ -106,6 +106,18 @@ The special key `@` can be used to match an arbitrary hash element key.
     ducky.validate({ foo: "Foo", bar: "Bar", baz: [ 42, 7, "Quux" ] },
         "{ foo: string, bar: any, baz: [ number+, string* ], quux?: any }") // &arr; true
 
+In case caching of the internally compiled Abstract Syntax Tree (AST)
+is not wishes, you can perform the compile and execute steps
+of `ducky.validate` individually:
+
+##### ducky.validate.compile(spec: String): Object
+
+Compile the validation specification `spec` into an AST.
+
+##### ducky.validate.execute(object: Object, ast: Object): Boolean
+
+Validate `object` against `ast` and return `true` in case it validates.
+
 #### ducky.params(name: String, args: Object[], spec: Object): Object
 
 Handle positional and named function parameters by processing
