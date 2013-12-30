@@ -1,6 +1,6 @@
 
 body {
-    font-family: "Open Sans";
+    font-family: "TypoPRO Open Sans";
     font-size: 11pt;
     background-color: #e0e0e0;
 }
@@ -97,9 +97,8 @@ body {
     padding: 10px 50px 10px 300px;
     color: #ffffff;
     background-color: #e06000;
-    font-size: 50px;
-    font-weight: 800;
-    letter-spacing: -2px;
+    font-family: "TypoPRO Yanone Kaffeesatz Bold";
+    font-size: 70px;
     text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.8);
     -webkit-border-top-right-radius: 8px;
     -webkit-border-bottom-right-radius: 8px;
@@ -127,7 +126,7 @@ body {
 .sample pre {
     padding: 0px;
     margin: 0px;
-    font-family: "Menlo", "DejaVu Sans Mono", monospace;
+    font-family: "TypoPRO DejaVu Sans Mono", monospace;
     font-size: 10pt;
 }
 .pitch {

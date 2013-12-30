@@ -58,17 +58,6 @@ module.exports = function (grunt) {
                 src: [ "bower_components/sanitize.css/sanitize.css" ],
                 dest: "lib/sanitize/sanitize.css"
             },
-            "open-sans-css": {
-                src: [ "bower_components/open-sans-fontface/open-sans.css" ],
-                dest: "lib/open-sans/open-sans.css"
-            },
-            "open-sans-fonts": {
-                files: [{
-                    expand: true, flatten: false, cwd: "bower_components/open-sans-fontface",
-                    src: "fonts/**",
-                    dest: "lib/open-sans/"
-                }]
-            },
             "font-awesome-css": {
                 src: [ "bower_components/font-awesome/css/font-awesome.css" ],
                 dest: "lib/font-awesome/font-awesome.css",
@@ -88,6 +77,16 @@ module.exports = function (grunt) {
             "gridless": {
                 src: [ "bower_components/gridless/predef/eg12.css" ],
                 dest: "lib/gridless/eg12.css"
+            },
+            "typopro": {
+                files: [
+                    { expand: true, flatten: false, cwd: "bower_components/typopro/web",
+                      src: "TypoPRO-OpenSans/**", dest: "lib/typopro/" },
+                    { expand: true, flatten: false, cwd: "bower_components/typopro/web",
+                      src: [ "TypoPRO-DejaVu/**", dest: "lib/typopro/" },
+                    { expand: true, flatten: false, cwd: "bower_components/typopro/web",
+                      src: "TypoPRO-YanoneKaffeesatz/**", dest: "lib/typopro/" }
+                ]
             }
         },
         clean: {
