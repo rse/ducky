@@ -26,7 +26,7 @@
 var validate_cache = {};
 
 /*  API function: validate an arbitrary value against a validation DSL  */
-Ducky.validate = function (value, spec) {
+ducky.validate = function (value, spec) {
     /*  sanity check arguments  */
     if (arguments.length !== 2)
         throw new Error("validate: invalid number of arguments: \"" +
@@ -39,15 +39,15 @@ Ducky.validate = function (value, spec) {
         or reuse cached pre-compiled validation AST  */
     var ast = validate_cache[spec];
     if (typeof ast === "undefined") {
-        ast = Ducky.validate.compile(spec);
+        ast = ducky.validate.compile(spec);
         validate_cache[spec] = ast;
     }
 
     /*  execute validation AST against the value  */
-    return Ducky.validate.execute(value, ast);
+    return ducky.validate.execute(value, ast);
 };
 
-Ducky.validate.compile = function (spec) {
+ducky.validate.compile = function (spec) {
     /*  sanity check arguments  */
     if (arguments.length !== 1)
         throw new Error("validate: invalid number of arguments: \"" +
@@ -65,7 +65,7 @@ Ducky.validate.compile = function (spec) {
     return ast;
 };
 
-Ducky.validate.execute = function (value, ast) {
+ducky.validate.execute = function (value, ast) {
     /*  sanity check arguments  */
     if (arguments.length !== 2)
         throw new Error("validate: invalid number of arguments: \"" +

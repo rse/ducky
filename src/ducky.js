@@ -35,8 +35,9 @@
     else
         /*  Browser environment  */
         root[name] = factory(root);
-}(this, "Ducky", function (/* root */) {
-    var Ducky = {};
+}(this, "ducky", function (/* root */) {
+    var ducky = {};
+    include("ducky-0-version.js");
     include("ducky-1-util.js");
     include("ducky-2-select-1-compile.js");
     include("ducky-2-select-2-execute.js");
@@ -46,6 +47,6 @@
     include("ducky-3-validate-3-execute.js");
     include("ducky-3-validate-4-api.js");
     include("ducky-4-params.js");
-    return Ducky;
+    return ducky;
 }));
 

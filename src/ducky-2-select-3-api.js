@@ -27,7 +27,7 @@ var select_cache = {};
 
 /*  API function: select an arbitrary value via a path specification
     and either get the current value or set the new value  */
-Ducky.select = function (obj, spec, value) {
+ducky.select = function (obj, spec, value) {
     /*  sanity check arguments  */
     if (arguments.length < 2)
         throw new Error("select: invalid number of arguments: \"" +
@@ -56,7 +56,7 @@ Ducky.select = function (obj, spec, value) {
 };
 
 /*  compile a path specification into array of dereferencing steps  */
-Ducky.select.compile = function (spec) {
+ducky.select.compile = function (spec) {
     /*  sanity check argument  */
     if (arguments.length !== 1)
         throw new Error("select: invalid number of arguments: \"" +
@@ -68,7 +68,7 @@ Ducky.select.compile = function (spec) {
 };
 
 /*  execute object selection  */
-Ducky.select.execute = function (obj, path) {
+ducky.select.execute = function (obj, path) {
     /*  sanity check arguments  */
     if (arguments.length < 2)
         throw new Error("select: invalid number of arguments: \"" +

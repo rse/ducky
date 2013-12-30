@@ -48,14 +48,14 @@ var params_is_name_based = function (args, spec) {
 var params_check_validity = function (func, param, value, valid, what) {
     if (typeof valid === "undefined")
         return;
-    if (!Ducky.validate(value, valid))
+    if (!ducky.validate(value, valid))
         throw new Error(func + ": parameter \"" + param + "\" has " +
             what + " " + JSON.stringify(value) + ", which does not validate " +
             "against \"" + valid + "\"");
 };
 
 /*  API function: flexible parameter handling  */
-Ducky.params = function (func, args, spec) {
+ducky.params = function (func, args, spec) {
     /*  start with a fresh parameter object  */
     var params = {};
 

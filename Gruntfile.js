@@ -33,6 +33,7 @@ module.exports = function (grunt) {
 
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
+        version: grunt.file.readYAML("VERSION.yml"),
         "expand-include": {
             "ducky": {
                 src: [ "src/ducky.js" ],
@@ -40,9 +41,10 @@ module.exports = function (grunt) {
                 options: {
                     directiveSyntax: "js",
                     globalDefines: {
-                        major: "<%= pkg.version.split('.')[0] %>",
-                        minor: "<%= pkg.version.split('.')[1] %>",
-                        micro: "<%= pkg.version.split('.')[2] %>"
+                        major: "<%= version.major %>",
+                        minor: "<%= version.minor %>",
+                        micro: "<%= version.micro %>",
+                        date:  "<%= version.date  %>"
                     }
                 }
             }
