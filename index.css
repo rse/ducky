@@ -95,8 +95,8 @@ body {
     -moz-border-radius-bottomright: 8px;
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
-    // -webkit-box-shadow: 0px 2px 6px 0px #999999;
-    // box-shadow: 0px 2px 6px 0px #999999;
+    -webkit-box-shadow: 0px 2px 6px 0px #999999;
+    box-shadow: 0px 2px 6px 0px #999999;
 }
 .content {
     position: relative;
@@ -115,7 +115,7 @@ body {
 .sample pre {
     padding: 0px;
     margin: 0px;
-    font-family: "Menlo";
+    font-family: "Menlo", "DejaVu Sans Mono", monospace;
     font-size: 10pt;
 }
 .pitch {
@@ -138,7 +138,7 @@ body {
 .terminal pre {
     padding: 0px;
     margin: 0px;
-    font-family: "Menlo";
+    font-family: "Menlo", "DejaVu Sans Mono", monospace;
     font-size: 10pt;
     color: #ffffff;
 }
