@@ -33,8 +33,8 @@ chai.use(require("chai-fuzzy"));
 global.expect = global.chai.expect
 global.chai.Assertion.includeStack = true
 
-var Ducky = require("../lib/ducky.js")
-var select = Ducky.select
+var ducky = require("../lib/ducky.js")
+var select = ducky.select
 
 describe("Ducky", function () {
     describe("select()", function () {

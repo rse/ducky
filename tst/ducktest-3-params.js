@@ -33,13 +33,13 @@ chai.use(require("chai-fuzzy"));
 global.expect = global.chai.expect
 global.chai.Assertion.includeStack = true
 
-var Ducky = require("../lib/ducky.js")
+var ducky = require("../lib/ducky.js")
 
 describe("Ducky", function () {
     describe("params()", function () {
         it("should parse 'arguments' of a function", function () {
             var foo = function () {
-                var params = Ducky.params("foo", arguments, {
+                var params = ducky.params("foo", arguments, {
                     name:    { pos: 0,     req: true,  valid: "string"      },
                     enabled: { pos: 1,     def: false, valid: "boolean"     },
                     spec:    { pos: 2,     def: [],    valid: "[ number* ]" },
