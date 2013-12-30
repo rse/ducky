@@ -32,10 +32,6 @@
             ev.preventDefault()
             swiper.swipeNext()
         })
-        $(".forkme").click(function (ev) {
-            ev.preventDefault()
-            document.location = "http://github.com/rse/ducky";
-        })
     })
 })(jQuery)
 
