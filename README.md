@@ -1,6 +1,6 @@
 
-Ducky &mdash; http://duckyjs.com/
-=================================
+Ducky &mdash; [duckyjs.com](http://duckyjs.com/)
+================================================
 
 **Duck-Typed Value Handling for JavaScript** 
 
@@ -13,25 +13,26 @@ Ducky &mdash; http://duckyjs.com/
 Abstract
 --------
 
-This is a JavaScript library for Duck-Testing values,
-for use in [Node.js](http://nodejs.org/) based server and browser based client
-environments.
+Ducky is a small Open-Source JavaScript library, providing Duck-Typed
+Value Validation, Value Selection and Flexible Function Parameter
+Handling. It can be used in [Node.js](http://nodejs.org/) based server
+and browser based client environments.
 
 Getting Ducky
 ----------------
 
 You can conveniently get Ducky in various ways:
 
-- Git: directly clone the official repository
-
-  `$ git clone https://github.com/rse/ducky.git`
-
-- Bower: install as client component via the Bower component manager:
-
+- Bower: install as client component via the Bower component manager:<br/>
   `$ bower install ducky`
 
-- cURL: downloading only the main file from the repository
+- NPM: install as server component via the Node Package Manager:<br/>
+  `$ npm install ducky`
 
+- Git: directly clone the official repository:<br/>
+  `$ git clone https://github.com/rse/ducky.git`
+
+- cURL: download only the main file from the repository:<br/>
   `$ curl -O https://raw.github.com/rse/ducky/master/lib/ducky.js`
 
 API
