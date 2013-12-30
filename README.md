@@ -39,9 +39,9 @@ API
 
 Ducky provides the following functions:
 
-#### select(*object*: Object, *path*: String, *value*?: Object): Object
+#### select(object: Object, path: String, value?: Object): Object
 
-Dereference into (and this way subset) *object* according to the
+Dereference into (and this way subset) `object` according to the
 `path` specification and either return the dereferenced value or
 set a new `value`. Object has to be a hash or array object. The
 `path` argument has to follow the following grammar (which is a
@@ -52,7 +52,7 @@ LHS          |     | RHS
 path         | ::= | segment segment\*       
 segment      | ::= | bybareword &#124; bykey  
 bybareword   | ::= | `"."`? identifier         
-bykey        | ::= | `"["` key "`]`"            
+bykey        | ::= | `"["` key `"]"`            
 identifier   | ::= | `/[_a-zA-Z$][_a-zA-Z$0-9]*>/`
 key          | ::= | number &#124; squote &#124; dquote
 number       | ::= | `/[0-9]+/`
@@ -64,35 +64,37 @@ dereferenced value. If the dereferenced parent object is a hash, this
 means the value is `delete`'ed from it. If the dereferenced parent
 object is an array, this means the value is `splice`'ed out of it.
 
-#### cs.select({ foo: { bar: { baz: [ 42, 7, "Quux" ] } } }, "foo['bar'].baz[2]") -> "Quux"
+    ducky.select({ foo: { bar: { baz: [ 42, 7, "Quux" ] } } },
+        "foo['bar'].baz[2]") // &rarr; "Quux"
 
-- ComponentJS.M<validate>(P<object>: T<Object>, P<spec>: T<String>): T<Boolean>
+#### validate(object: Object, spec: String): Boolean
 
-  Validate an arbitrary nested JavaScript object P<object> against the
-  specification P<spec>. The specification P<spec> has to be either
-  a C<RegExp> object for T<String> validation, a validation function of signature
-  "P<spec>(T<Object>): T<Boolean>" or a string following the following grammar (which
-  is a mixture of JSON-like structure and RegExp-like quantifiers):
+Validate an arbitrary nested JavaScript object `object` against the
+specification `spec`. The specification `spec` has to be either
+a `RegExp` object for `String` validation, a validation function of signature
+`spec(Object): Boolean` or a string following the following grammar (which
+is a mixture of JSON-like structure and RegExp-like quantifiers):
 
-  + spec      + ::= + not | alt | hash | array | any | primary | class | special
-  + not       + ::= + "C<!>" spec
-  + alt       + ::= + "C<(>" spec ("C<|>" spec)* "C<)>"
-  + hash      + ::= + "C<{>" (key arity? "C<:>" spec ("C<,>" key arity? "C<:>" spec)*)? "C<}>"
-  + array     + ::= + "C<[>" (spec arity? ("C<,>" spec arity?)*)? "C<]>"
-  + arity     + ::= + "C<?>" | "C<*>" | "C<+>" | "C<{>" number "C<,>" (number | "C<oo>") "C<}>"
-  + number    + ::= + /C<^[0-9]+$>/
-  + key       + ::= + /C<^[_a-zA-Z$][_a-zA-Z$0-9]*$>/ | "C<@>"
-  + any       + ::= + "C<any>"
-  + primary   + ::= + /C<^(?:null|undefined|boolean|number|string|function|object)$>/
-  + class     + ::= + /C<^[A-Z][_a-zA-Z$0-9]*$>/
-  + special   + ::= + /C<^(?:clazz|trait|component)$>/
+LHS          |     | RHS                    
+------------ | --- | -----------------------------
+spec         | ::= | not &#124; alt &#124; hash &#124; array &#124; any &#124; primary &#124; class
+not          | ::= | `"!"` spec
+alt          | ::= | `"("` spec (`"&#124;"` spec)\* `")"`
+hash         | ::= | `"{"` (key arity? `":"` spec (`","` key arity? `":"` spec)\*)? `"}"`
+array        | ::= | `"["` (spec arity? (`","` spec arity?)\*)? `"]"`
+arity        | ::= | `"?"` &#124; `"*"` &#124; `"+"` &#124; `"{"` number `","` (number &#124; `"oo"`) `"}"`
+number       | ::= | `/^[0-9]+$/`
+key          | ::= | `/^[_a-zA-Z$][_a-zA-Z$0-9]*$/ &#124; `"@"`
+any          | ::= | `"any"`
+primary      | ::= | `/^(?:null&#124;undefined&#124;boolean&#124;number&#124;string&#124;function&#124;object)$/`
+class        | ::= | `/^[A-Z][_a-zA-Z$0-9]\*$/`
 
-  The special key "C<@>" can be used to match an arbitrary hash element key.
+The special key `@` can be used to match an arbitrary hash element key.
 
-  | cs.validate({ foo: "Foo", bar: "Bar", baz: [ 42, 7, "Quux" ] },
-  |      "{ foo: string, bar: any, baz: [ number+, string* ], quux?: any }")
+    validate({ foo: "Foo", bar: "Bar", baz: [ 42, 7, "Quux" ] },
+        "{ foo: string, bar: any, baz: [ number+, string* ], quux?: any }") // &arr; true
 
-- ComponentJS.M<params>(P<name>: T<String>, P<args>: T<Object[]>, P<spec>: T<Object>): T<Object>
+#### params(P<name>: T<String>, P<args>: T<Object[]>, P<spec>: T<Object>): T<Object>
 
   Handle positional and named function parameters by processing
   a function's C<arguments> array. Parameter P<name> is the name
