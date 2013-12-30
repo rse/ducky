@@ -38,7 +38,14 @@ You can conveniently get Ducky in various ways:
 API
 ---
 
-Ducky provides the following functions:
+Ducky provides the following API:
+
+#### ducky.version = { major: Number, minor: Number, micro: Number, date: Number }
+
+The version of Ducky, provided as a tuple of separate pieces, for easy comparison.
+
+   if (!(ducky.version.major >= 2 && ducky.version.minor >= 0))
+       throw new Error("need at least Ducky 2.0.0");
 
 #### ducky.select(object: Object, path: String, value?: Object): Object
 
