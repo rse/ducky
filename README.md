@@ -44,8 +44,8 @@ Ducky provides the following API:
 
 The version of Ducky, provided as a tuple of separate pieces, for easy comparison.
 
-   if (!(ducky.version.major >= 2 && ducky.version.minor >= 0))
-       throw new Error("need at least Ducky 2.0.0");
+    if (!(ducky.version.major >= 2 && ducky.version.minor >= 0))
+        throw new Error("need at least Ducky 2.0.0");
 
 #### ducky.select(object: Object, path: String, value?: Object): Object
 
