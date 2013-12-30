@@ -45,6 +45,18 @@ body {
 .swiper-slide.slide3 {
 }
 
+.footer {
+    margin-top: 20px;
+    width: 100%;
+    text-align: center;
+    color: #999999;
+    font-size: 9pt;
+}
+.footer a {
+    text-decoration: underline;
+    color: #999999;
+}
+
 .canvas .icons {
     position: absolute;
     top: 0px;
