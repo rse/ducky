@@ -22,7 +22,7 @@
 **  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-interface Ducky {
+interface ducky_api {
     validate: {
         (obj: any, spec: string): boolean;
         compile(spec: string): Object;
@@ -46,4 +46,6 @@ interface Ducky {
         }
     ): Object;
 }
+
+declare var ducky: ducky_api;
 
