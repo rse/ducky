@@ -39,7 +39,7 @@ API
 
 Ducky provides the following functions:
 
-#### select(object: Object, path: String, value?: Object): Object
+#### ducky.select(object: Object, path: String, value?: Object): Object
 
 Dereference into (and this way subset) `object` according to the
 `path` specification and either return the dereferenced value or
@@ -67,6 +67,18 @@ object is an array, this means the value is `splice`'ed out of it.
     ducky.select({ foo: { bar: { baz: [ 42, 7, "Quux" ] } } },
         "foo['bar'].baz[2]") // &rarr; "Quux"
 
+In case caching of the internally compiled Abstract Syntax Tree (AST)
+is not wishes, you can perform the compile and execute steps
+of `ducky.select` individually:
+
+##### ducky.select.compile(path: String): Object
+
+Compile the selection specification `path` into an AST.
+
+##### ducky.select.execute(object: Object, ast: Object, value?: Object): Object
+
+Select from `object` a value via `ast` and either return it or set it to the new value `value`.
+
 #### validate(object: Object, spec: String): Boolean
 
 Validate an arbitrary nested JavaScript object `object` against the
@@ -91,10 +103,10 @@ class        | ::= | `/^[A-Z][_a-zA-Z$0-9]\*$/`
 
 The special key `@` can be used to match an arbitrary hash element key.
 
-    validate({ foo: "Foo", bar: "Bar", baz: [ 42, 7, "Quux" ] },
+    ducky.validate({ foo: "Foo", bar: "Bar", baz: [ 42, 7, "Quux" ] },
         "{ foo: string, bar: any, baz: [ number+, string* ], quux?: any }") // &arr; true
 
-#### params(name: String, args: Object[], spec: Object): Object
+#### ducky.params(name: String, args: Object[], spec: Object): Object
 
 Handle positional and named function parameters by processing
 a function's `arguments` array. Parameter `name` is the name
