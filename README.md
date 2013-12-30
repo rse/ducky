@@ -84,9 +84,9 @@ hash         | ::= | `"{"` (key arity? `":"` spec (`","` key arity? `":"` spec)\
 array        | ::= | `"["` (spec arity? (`","` spec arity?)\*)? `"]"`
 arity        | ::= | `"?"` &#124; `"*"` &#124; `"+"` &#124; `"{"` number `","` (number &#124; `"oo"`) `"}"`
 number       | ::= | `/^[0-9]+$/`
-key          | ::= | `/^[_a-zA-Z$][_a-zA-Z$0-9]*$/ &#124; `"@"`
+key          | ::= | `/^[_a-zA-Z$][_a-zA-Z$0-9]*$/` &#124; `"@"`
 any          | ::= | `"any"`
-primary      | ::= | `/^(?:null&#124;undefined&#124;boolean&#124;number&#124;string&#124;function&#124;object)$/`
+primary      | ::= | `/^(?:null|undefined|boolean|number|string|function|object)$/`
 class        | ::= | `/^[A-Z][_a-zA-Z$0-9]\*$/`
 
 The special key `@` can be used to match an arbitrary hash element key.
@@ -94,39 +94,38 @@ The special key `@` can be used to match an arbitrary hash element key.
     validate({ foo: "Foo", bar: "Bar", baz: [ 42, 7, "Quux" ] },
         "{ foo: string, bar: any, baz: [ number+, string* ], quux?: any }") // &arr; true
 
-#### params(P<name>: T<String>, P<args>: T<Object[]>, P<spec>: T<Object>): T<Object>
+#### params(name: String, args: Object[], spec: Object): Object
 
-  Handle positional and named function parameters by processing
-  a function's C<arguments> array. Parameter P<name> is the name
-  of the function for use in exceptions in case of invalid parameters.
-  Parameter P<args> usually is the JavaScript C<arguments> pseudo-array of
-  a function. Parameter P<spec> is the parameter specification: each key
-  is the name of a parameter and the value has to be an T<Object> with
-  the following possible fields: P<pos> for the optional position in case
-  of positional usage, P<def> for the default value (of not required
-  and hence optional parameters), P<req> to indicate whether the
-  parameter is required and P<valid> for type validation (either
-  a string accepted by the M<validate>() method,
-  or a valid regular expression C</.../> object
-  for validating a T<String> against it or an arbitrary validation callback function
-  of signature "P<valid>(T<Object>): T<Boolean>".
+Handle positional and named function parameters by processing
+a function's `arguments` array. Parameter `name` is the name
+of the function for use in exceptions in case of invalid parameters.
+Parameter `args` usually is the JavaScript `arguments` pseudo-array of
+a function. Parameter `spec` is the parameter specification: each key
+is the name of a parameter and the value has to be an `Object` with
+the following possible fields: `pos` for the optional position in case
+of positional usage, `def` for the default value (of not required
+and hence optional parameters), `req` to indicate whether the
+parameter is required and `valid` for type validation (either
+a string accepted by the `validate>()` method,
+or a valid regular expression `/.../` object
+for validating a `String` against it or an arbitrary validation callback function
+of signature `valid(Object): Boolean`.
 
-  | function config () {
-  |     var params = $cs.params("config", arguments, {
-  |         scope: { pos: 0, req: true,      valid: "boolean"           },
-  |         key:   { pos: 1, req: true,      valid: /^[a-z][a-z0-9_]*$/ },
-  |         value: { pos: 2, def: undefined, valid: "object"            },
-  |         force: {         def: false,     valid: "boolean"           }
-  |     });
-  |     var result = db_get(params.scope, params.key);
-  |     if (typeof params.value !== "undefined")
-  |         db_set(params.scope, params.key, params.value, params.force);
-  |     return result;
-  | }
-  | var value = config("foo", "bar");
-  | config("foo", "bar", "quux");
-  | config({ scope: "foo", key: "bar", value: "quux", force: true });
-
+    function config () {
+        var params = ducky.params("config", arguments, {
+            scope: { pos: 0, req: true,      valid: "boolean"           },
+            key:   { pos: 1, req: true,      valid: /^[a-z][a-z0-9_]*$/ },
+            value: { pos: 2, def: undefined, valid: "object"            },
+            force: {         def: false,     valid: "boolean"           }
+        });
+        var result = cfg_get(params.scope, params.key);
+        if (typeof params.value !== "undefined")
+            cfg_set(params.scope, params.key, params.value, params.force);
+        return result;
+    }
+    var value = config("foo", "bar");
+    config("foo", "bar", "quux");
+    config({ scope: "foo", key: "bar", value: "quux", force: true });
 
 License
 -------
