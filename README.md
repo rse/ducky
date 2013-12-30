@@ -39,32 +39,32 @@ API
 
 Ducky provides the following functions:
 
-#### select(object: Object, path: String, value?: Object): Object
+#### select(*object*: Object, *path*: String, *value*?: Object): Object
 
-Dereference into (and this way subset) `object` according to the
+Dereference into (and this way subset) *object* according to the
 `path` specification and either return the dereferenced value or
 set a new `value`. Object has to be a hash or array object. The
 `path` argument has to follow the following grammar (which is a
 direct JavaScript dereferencing syntax):
 
-| LHS          |     | RHS                           |
-| ------------ | --- | ----------------------------- |
-| path         | ::= | segment segment\*             |
-| segment      | ::= | bybareword \| bykey           |
-| bybareword   | ::= | `"."`? identifier             |
-| bykey        | ::= | `"["` key "`]`"               |
-| identifier   | ::= | `/[_a-zA-Z$][_a-zA-Z$0-9]*>/` |
-| key          | ::= | number \| squote \| dquote    |
-| number       | ::= | `/[0-9]+/`                    |
-| dquote       | ::= | `/"(?:\\"|.)*?"/`             |
-| squote       | ::= | `/'(?:\\'|.)*?'/`             |
+LHS          |     | RHS                    
+------------ | --- | -----------------------------
+path         | ::= | segment segment\*       
+segment      | ::= | bybareword &#124; bykey  
+bybareword   | ::= | `"."`? identifier         
+bykey        | ::= | `"["` key "`]`"            
+identifier   | ::= | `/[_a-zA-Z$][_a-zA-Z$0-9]*>/`
+key          | ::= | number &#124; squote &#124; dquote
+number       | ::= | `/[0-9]+/`
+dquote       | ::= | `/"(?:\\"|.)*?"/`
+squote       | ::= | `/'(?:\\'|.)*?'/`
 
 Setting the `value` to `undefined` effectively removes the
 dereferenced value. If the dereferenced parent object is a hash, this
 means the value is `delete`'ed from it. If the dereferenced parent
 object is an array, this means the value is `splice`'ed out of it.
 
-## cs.select({ foo: { bar: { baz: [ 42, 7, "Quux" ] } } }, "foo['bar'].baz[2]") -> "Quux"
+#### cs.select({ foo: { bar: { baz: [ 42, 7, "Quux" ] } } }, "foo['bar'].baz[2]") -> "Quux"
 
 - ComponentJS.M<validate>(P<object>: T<Object>, P<spec>: T<String>): T<Boolean>
 
