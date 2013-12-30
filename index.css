@@ -129,10 +129,16 @@ body {
     font-family: "TypoPRO DejaVu Sans Mono", monospace;
     font-size: 10pt;
 }
+code {
+    font-family: "TypoPRO DejaVu Sans Mono", monospace;
+    font-size: 10pt;
+}
 .pitch {
     position: relative;
     top: 100px;
+    font-family: "TypoPRO Open Sans Semibold";
     font-size: 14pt;
+    font-weight: bold;
     padding-right: 100px;
 }
 
