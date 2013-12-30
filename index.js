@@ -16,6 +16,7 @@
             paginationClickable: true,
             createPagination: true,
             hashNav: true,
+            preventLinks: false,
             scrollbar: {
                 container: ".swiper-scrollbar",
                 draggable: true,
