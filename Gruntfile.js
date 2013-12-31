@@ -83,7 +83,7 @@ module.exports = function (grunt) {
                     { expand: true, flatten: false, cwd: "bower_components/typopro/web",
                       src: "TypoPRO-OpenSans/**", dest: "lib/typopro/" },
                     { expand: true, flatten: false, cwd: "bower_components/typopro/web",
-                      src: [ "TypoPRO-DejaVu/**", dest: "lib/typopro/" },
+                      src: "TypoPRO-DejaVu/**", dest: "lib/typopro/" },
                     { expand: true, flatten: false, cwd: "bower_components/typopro/web",
                       src: "TypoPRO-YanoneKaffeesatz/**", dest: "lib/typopro/" }
                 ]
