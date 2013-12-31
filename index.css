@@ -110,6 +110,18 @@ body {
     -webkit-box-shadow: 0px 2px 6px 0px #999999;
     box-shadow: 0px 2px 6px 0px #999999;
 }
+.tag {
+    font-family: "TypoPRO Journal";
+    font-size: 30pt;
+    letter-spacing: 1px;
+    position: absolute;
+    top: 20px;
+    left: 250px;
+    color: #666666;
+    transform: rotate(-3deg);
+    -ms-transform: rotate(-3deg);
+    -webkit-transform: rotate(-3deg);
+}
 .content {
     position: relative;
     top: 250px;
