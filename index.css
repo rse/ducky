@@ -97,7 +97,8 @@ body {
     padding: 10px 50px 10px 300px;
     color: #ffffff;
     background-color: #e06000;
-    font-family: "TypoPRO Yanone Kaffeesatz Bold";
+    font-family: "TypoPRO Yanone Kaffeesatz";
+    font-weight: bold;
     font-size: 70px;
     text-shadow: 0px 1px 4px rgba(0, 0, 0, 0.8);
     -webkit-border-top-right-radius: 8px;
@@ -126,19 +127,19 @@ body {
 .sample pre {
     padding: 0px;
     margin: 0px;
-    font-family: "TypoPRO DejaVu Sans Mono", monospace;
+    font-family: "TypoPRO DejaVu Sans Mono";
     font-size: 10pt;
 }
 code {
-    font-family: "TypoPRO DejaVu Sans Mono", monospace;
+    font-family: "TypoPRO DejaVu Sans Mono";
     font-size: 10pt;
 }
 .pitch {
     position: relative;
     top: 100px;
-    font-family: "TypoPRO Open Sans Semibold";
+    font-family: "TypoPRO Open Sans";
     font-size: 14pt;
-    font-weight: bold;
+    font-weight: 600;
     padding-right: 100px;
 }
 
