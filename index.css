@@ -179,54 +179,54 @@ pre {
     color: #222222;
 }
 
-pre .comment,
-pre .template_comment,
-pre .javadoc,
-pre .comment * {
+pre .hljs-comment,
+pre .hljs-template_comment,
+pre .hljs-javadoc,
+pre .hljs-comment * {
   color: #999999;
   font-style: italic;
 }
 
-pre .keyword,
-pre .ruby .function .keyword,
-pre .function .keyword,
-pre .sub .keyword,
-pre .method,
-pre .list .title,
-pre .tag .title,
-pre .setting .value,
-pre .winutils,
-pre .tex .command {
+pre .hljs-keyword,
+pre .hljs-ruby .hljs-function .hljs-keyword,
+pre .hljs-function .hljs-keyword,
+pre .hljs-sub .hljs-keyword,
+pre .hljs-method,
+pre .hljs-list .hljs-title,
+pre .hljs-tag .hljs-title,
+pre .hljs-setting .hljs-value,
+pre .hljs-winutils,
+pre .hljs-tex .hljs-command {
   color: #333333;
   font-weight: bold;
 }
 
-pre .string,
-pre .tag .value,
-pre .cdata,
-pre .filter .argument,
-pre .attr_selector,
-pre .apache .cbracket,
-pre .date,
-pre .regexp,
-pre .sub .identifier,
-pre .pi,
-pre .tag,
-pre .tag .keyword,
-pre .decorator,
-pre .ini .title,
-pre .shebang,
-pre .input_number,
-pre .hexcolor,
-pre .rules .value,
-pre .css .value .number,
-pre .literal,
-pre .symbol,
-pre .ruby .symbol .string,
-pre .ruby .symbol .keyword,
-pre .ruby .symbol .keymethods,
-pre .number,
-pre .css .function {
+pre .hljs-string,
+pre .hljs-tag .hljs-value,
+pre .hljs-cdata,
+pre .hljs-filter .hljs-argument,
+pre .hljs-attr_selector,
+pre .hljs-apache .hljs-cbracket,
+pre .hljs-date,
+pre .hljs-regexp,
+pre .hljs-sub .hljs-identifier,
+pre .hljs-pi,
+pre .hljs-tag,
+pre .hljs-tag .hljs-keyword,
+pre .hljs-decorator,
+pre .hljs-ini .hljs-title,
+pre .hljs-shebang,
+pre .hljs-input_number,
+pre .hljs-hexcolor,
+pre .hljs-rules .hljs-value,
+pre .hljs-css .hljs-value .hljs-number,
+pre .hljs-literal,
+pre .hljs-symbol,
+pre .hljs-ruby .hljs-symbol .hljs-string,
+pre .hljs-ruby .hljs-symbol .hljs-keyword,
+pre .hljs-ruby .hljs-symbol .hljs-keymethods,
+pre .hljs-number,
+pre .hljs-css .hljs-function {
   color: #e06000;
 }
 

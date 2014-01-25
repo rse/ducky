@@ -1,4 +1,4 @@
-/*! Sanitize.css | MIT License | http://git.io/sanitize */
+/*! Sanitize.css v1.0.1 | MIT License | http://git.io/sanitize */
 
 /*
  * Display definitions
@@ -57,15 +57,6 @@ body {
   margin: 0;
 }
 
-/* Remove shadow from selected text in Firefox, Safari and Chrome. */
-::-moz-selection {
-  text-shadow: none;
-}
-
-::selection {
-  text-shadow: none;
-}
-
 /*
  * Links
  */
@@ -91,7 +82,7 @@ abbr[title] {
   border-bottom: 1px dotted;
 }
 
-/* Address style set to `bolder` in Firefox, Safari 5, and Chrome. */
+/* Address weight set to `bolder` in Firefox, Safari 5. */
 b,
 strong {
   font-weight: bold;
@@ -179,13 +170,13 @@ video {
   vertical-align: middle;
 }
 
-/* 1. Scale the height according to the width.
-   2. Set a maximum width relative to the parent.
-   3. Remove border when inside `a` element in IE 9. */
+/* Scale the height according to the width.
+   Set a maximum width relative to the parent.
+   Remove border when inside `a` element in IE 9. */
 img {
-  height: auto; /* 1 */
-  max-width: 100%; /* 2 */
-  border: 0; /* 3 */
+  height: auto;
+  max-width: 100%;
+  border: 0;
 }
 
 /* Correct overflow displayed oddly in IE 9. */
@@ -231,6 +222,11 @@ textarea {
   color: inherit;
 }
 
+/* Address inconsistent opacity in Mozilla Firefox 19+. */
+input::-moz-placeholder{
+  opacity: 1;
+}
+
 /* Address `overflow` set to `hidden` in IE 9/10. */
 button {
   overflow: visible;
@@ -268,20 +264,23 @@ html input[disabled] {
   cursor: default;
 }
 
-/* 1. Remove excess padding in IE 9+.
-   2. Address box sizing set to `content-box` in IE 9+. */
+/* Remove excess padding in IE 9+.
+   Improve positioning.
+   Address box sizing set to `content-box` in IE 9+. */
 input[type="checkbox"],
 input[type="radio"] {
-  padding: 0; /* 1 */
-  box-sizing: border-box; /* 2 */
+  padding: 0;
+  margin: 4px 0 0;
+  line-height: normal;
+  box-sizing: border-box;
 }
 
-/* 1. Address `box-sizing` set to `border-box` in Safari 5 and Chrome.
-   2. Address `appearance` set to `searchfield` in Safari 5 and Chrome. */
+/* Address `box-sizing` set to `border-box` in Safari 5 and Chrome.
+   Address `appearance` set to `searchfield` in Safari 5 and Chrome. */
 input[type="search"] {
-  -moz-box-sizing: border-box; /* 1 */
-       box-sizing: border-box; /* 1 */
-  -webkit-appearance: textfield; /* 2 */
+  -moz-box-sizing: border-box;
+       box-sizing: border-box;
+  -webkit-appearance: textfield;
 }
 
 /* Remove inner padding and search cancel button in Safari 5 and Chrome
@@ -298,13 +297,13 @@ input::-moz-focus-inner {
   border: 0;
 }
 
-/* 1. Remove default padding in Chrome.
-   2. Remove default vertical scrollbar in IE 9.
-   3. Improve readability and alignment in all browsers. */
+/* Remove default padding in Chrome.
+   Remove default vertical scrollbar in IE 9.
+   Improve readability and alignment in all browsers. */
 textarea {
-  padding: 0; /* 1 */
-  overflow: auto; /* 2 */
-  vertical-align: top; /* 3 */
+  padding: 0;
+  overflow: auto;
+  vertical-align: top;
 }
 
 /*
