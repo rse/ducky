@@ -1,6 +1,6 @@
 ##
 ##  Ducky -- Duck-Typed Value Handling for JavaScript
-##  Copyright (c) 2010-2013 Ralf S. Engelschall <rse@engelschall.com>
+##  Copyright (c) 2010-2014 Ralf S. Engelschall <rse@engelschall.com>
 ##
 ##  Permission is hereby granted, free of charge, to any person obtaining
 ##  a copy of this software and associated documentation files (the
@@ -24,6 +24,6 @@
 
 major: 2
 minor: 0
-micro: 2
-date:  20131230
+micro: 3
+date:  20140125
 
