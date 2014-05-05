@@ -107,7 +107,7 @@ number       | ::= | `/^[0-9]+$/`
 key          | ::= | `/^[_a-zA-Z$][_a-zA-Z$0-9]*$/` &#124; `"@"`
 any          | ::= | `"any"`
 primary      | ::= | `/^(?:null|undefined|boolean|number|string|function|object)$/`
-class        | ::= | `/^[A-Z][_a-zA-Z$0-9]\*$/`
+class        | ::= | `/^[_a-zA-Z$][_a-zA-Z$0-9]\*(?:\.[_a-zA-Z$][_a-zA-Z$0-9]\*)\*$/`
 
 The special key `@` can be used to match an arbitrary hash element key.
 
