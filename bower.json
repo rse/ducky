@@ -1,16 +1,16 @@
 {
     "name": "ducky",
     "dependencies": {
-        "sanitize.css":       "1.0.1",
+        "sanitize.css":       "2.0.0",
         "font-awesome":       "4.0.3",
-        "jquery":             "2.1.0",
+        "jquery":             "2.1.1",
         "jquery-markup":      "1.0.28",
-        "nunjucks":           "1.0.1",
+        "nunjucks":           "1.0.4",
         "director":           "1.2.2",
         "lodash":             "2.4.1",
-        "swiper":             "2.4.2",
+        "swiper":             "2.6.0",
         "highlightjs":        "8.0.0",
         "gridless":           "1.0.1",
-        "typopro":            "0.9.8"
+        "typopro":            "2.0.3"
     }
 }
