@@ -1,6 +1,6 @@
 {
     "name": "ducky",
-    "version": "2.0.3",
+    "version": "2.0.4",
     "description": "Duck-Typed Value Handling for JavaScript",
     "main": "./lib/ducky.js",
     "homepage": "http://duckyjs.com",
