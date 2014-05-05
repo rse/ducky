@@ -31,7 +31,7 @@
 global.chai = require("chai")
 chai.use(require("chai-fuzzy"));
 global.expect = global.chai.expect
-global.chai.Assertion.includeStack = true
+global.chai.config.includeStack = true
 
 var ducky = require("../lib/ducky.js")
 
