@@ -65,8 +65,12 @@ describe("Ducky", function () {
         it("should validate stand-alone classes", function () {
             expect(validate(new Array(), "Array")).to.be.true
             expect(validate(new RegExp(), "RegExp")).to.be.true
-            global.Foo = function () {}
-            expect(validate(new Foo(), "Foo")).to.be.true
+            var Foo = function () {}
+            expect(validate(new Foo(), "Foo")).to.be.false
+            ducky.register("Foo", Foo);
+            var Quux = function () {}
+            ducky.register("foo.bar.Quux", Quux);
+            expect(validate(new Quux(), "foo.bar.Quux")).to.be.true
         })
         it("should validate arrays with arities", function () {
             expect(validate([], "[ any ]")).to.be.false

@@ -39,14 +39,15 @@
     var ducky = {};
     include("ducky-0-version.js");
     include("ducky-1-util.js");
-    include("ducky-2-select-1-compile.js");
-    include("ducky-2-select-2-execute.js");
-    include("ducky-2-select-3-api.js");
-    include("ducky-3-validate-1-tokenize.js");
-    include("ducky-3-validate-2-parse.js");
-    include("ducky-3-validate-3-execute.js");
-    include("ducky-3-validate-4-api.js");
-    include("ducky-4-params.js");
+    include("ducky-2-registry.js");
+    include("ducky-3-select-1-compile.js");
+    include("ducky-3-select-2-execute.js");
+    include("ducky-3-select-3-api.js");
+    include("ducky-4-validate-1-tokenize.js");
+    include("ducky-4-validate-2-parse.js");
+    include("ducky-4-validate-3-execute.js");
+    include("ducky-4-validate-4-api.js");
+    include("ducky-5-params.js");
     return ducky;
 }));
 

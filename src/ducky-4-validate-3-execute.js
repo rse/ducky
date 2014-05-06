@@ -141,11 +141,14 @@ var validate_execute = {
 
     /*  validate custom JavaScript type  */
     exec_class: function (value, node) {
-        /* jshint evil:true */
-        /* eslint no-eval: 0 */
-        return (   typeof value === "object"
-               && (   Object.prototype.toString.call(value) === "[object " + node.name + "]")
-                   || eval("value instanceof " + node.name)                                  );
+        return (
+               typeof value === "object"
+            && (
+                  Object.prototype.toString.call(value) === "[object " + node.name + "]"
+               || (   typeof registry[node.name] === "function"
+                   && value instanceof registry[node.name])
+            )
+        );
     }
 };
 

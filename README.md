@@ -2,7 +2,7 @@
 Ducky &mdash; [duckyjs.com](http://duckyjs.com/)
 ================================================
 
-**Duck-Typed Value Handling for JavaScript** 
+**Duck-Typed Value Handling for JavaScript**
 
 <p/>
 <img src="https://nodei.co/npm/ducky.png?downloads=true&stars=true" alt=""/>
@@ -47,6 +47,30 @@ The version of Ducky, provided as a tuple of separate pieces, for easy compariso
     if (!(ducky.version.major >= 2 && ducky.version.minor >= 0))
         throw new Error("need at least Ducky 2.0.0");
 
+#### ducky.register(name: String, type: Function): void
+
+Register under `name` an additional host or application type,
+represented by the constructor function `type`. This allows
+`ducky.validate()` and `ducky.params()` to validate objects
+which are instances of the type.
+
+    var Foo = function () { ... };
+    ducky.register("app.Foo", Foo);
+    ducky.validate(new Foo(), "app.Foo");
+
+The following host types are pre-registered by default (if actually
+existing in the particular native or "polyfilled" host environment):
+`Object`, `Boolean`, `Number`, `String`, `Function`, `RegExp`, `Array`,
+`Date`, `Error`, `Set`, `Map`, `WeakMap`, `Promise`, `Proxy` and
+`Iterator`.
+
+#### ducky.unregister(name: String): void
+
+Unregisters the additional host or application type, which was previously
+registered under `name` with `ducky.register()`.
+
+    ducky.unregister("app.Foo");
+
 #### ducky.select(object: Object, path: String, value?: Object): Object
 
 Dereference into (and this way subset) `object` according to the
@@ -55,12 +79,12 @@ set a new `value`. Object has to be a hash or array object. The
 `path` argument has to follow the following grammar (which is a
 direct JavaScript dereferencing syntax):
 
-LHS          |     | RHS                    
+LHS          |     | RHS
 ------------ | --- | -----------------------------
-path         | ::= | segment segment\*       
-segment      | ::= | bybareword &#124; bykey  
-bybareword   | ::= | `"."`? identifier         
-bykey        | ::= | `"["` key `"]"`            
+path         | ::= | segment segment\*
+segment      | ::= | bybareword &#124; bykey
+bybareword   | ::= | `"."`? identifier
+bykey        | ::= | `"["` key `"]"`
 identifier   | ::= | `/[_a-zA-Z$][_a-zA-Z$0-9]*>/`
 key          | ::= | number &#124; squote &#124; dquote
 number       | ::= | `/[0-9]+/`
@@ -87,14 +111,14 @@ Compile the selection specification `path` into an AST.
 
 Select from `object` a value via `ast` and either return it or set it to the new value `value`.
 
-#### validate(object: Object, spec: String): Boolean
+#### ducky.validate(object: Object, spec: String): Boolean
 
 Validate an arbitrary nested JavaScript object `object` against the
 specification `spec`. The specification `spec` has to be a string
 following the following grammar (which is a mixture of JSON-like
 structure and RegExp-like quantifiers):
 
-LHS          |     | RHS                    
+LHS          |     | RHS
 ------------ | --- | -----------------------------
 spec         | ::= | not &#124; alt &#124; hash &#124; array &#124; any &#124; primary &#124; class
 not          | ::= | `"!"` spec
