@@ -90,10 +90,9 @@ Select from `object` a value via `ast` and either return it or set it to the new
 #### validate(object: Object, spec: String): Boolean
 
 Validate an arbitrary nested JavaScript object `object` against the
-specification `spec`. The specification `spec` has to be either
-a `RegExp` object for `String` validation, a validation function of signature
-`spec(Object): Boolean` or a string following the following grammar (which
-is a mixture of JSON-like structure and RegExp-like quantifiers):
+specification `spec`. The specification `spec` has to be a string
+following the following grammar (which is a mixture of JSON-like
+structure and RegExp-like quantifiers):
 
 LHS          |     | RHS                    
 ------------ | --- | -----------------------------
@@ -128,20 +127,17 @@ Validate `object` against `ast` and return `true` in case it validates.
 
 #### ducky.params(name: String, args: Object[], spec: Object): Object
 
-Handle positional and named function parameters by processing
-a function's `arguments` array. Parameter `name` is the name
-of the function for use in exceptions in case of invalid parameters.
-Parameter `args` usually is the JavaScript `arguments` pseudo-array of
-a function. Parameter `spec` is the parameter specification: each key
-is the name of a parameter and the value has to be an `Object` with
-the following possible fields: `pos` for the optional position in case
-of positional usage, `def` for the default value (of not required
-and hence optional parameters), `req` to indicate whether the
-parameter is required and `valid` for type validation (either
-a string accepted by the `validate>()` method,
-or a valid regular expression `/.../` object
-for validating a `String` against it or an arbitrary validation callback function
-of signature `valid(Object): Boolean`.
+Handle positional and named function parameters by processing a
+function's `arguments` array. Parameter `name` is the name of the
+function for use in exceptions in case of invalid parameters. Parameter
+`args` usually is the JavaScript `arguments` pseudo-array of a function.
+Parameter `spec` is the parameter specification: each key is the name
+of a parameter and the value has to be an `Object` with the following
+possible fields: `pos` for the optional position in case of positional
+usage, `def` for the default value (of not required and hence optional
+parameters), `req` to indicate whether the parameter is required and
+`valid` for type validation (a validation specification string accepted
+by the `validate>()` method).
 
     function config () {
         var params = ducky.params("config", arguments, {
