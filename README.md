@@ -122,7 +122,7 @@ LHS          |     | RHS
 ------------ | --- | -----------------------------
 spec         | ::= | not &#124; alt &#124; hash &#124; array &#124; any &#124; primary &#124; class
 not          | ::= | `"!"` spec
-alt          | ::= | `"("` spec (`"&#124;"` spec)\* `")"`
+alt          | ::= | `"("` spec (`"`&#124;`"` spec)\* `")"`
 hash         | ::= | `"{"` (key arity? `":"` spec (`","` key arity? `":"` spec)\*)? `"}"`
 array        | ::= | `"["` (spec arity? (`","` spec arity?)\*)? `"]"`
 arity        | ::= | `"?"` &#124; `"*"` &#124; `"+"` &#124; `"{"` number `","` (number &#124; `"oo"`) `"}"`
