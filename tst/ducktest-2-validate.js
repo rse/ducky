@@ -101,6 +101,11 @@ describe("Ducky", function () {
             expect(validate({ foo: "foo" }, "{ foo: any }")).to.be.true
             expect(validate({ foo: "foo", bar: "bar" }, "{ foo: any }")).to.be.false
         })
+        it("should validate hashes with arbitrary keys", function () {
+            expect(validate({}, "{ @?: any }")).to.be.true
+            expect(validate({ foo: "foo" }, "{ @: any }")).to.be.true
+            expect(validate({ foo: "foo" }, "{ @: number }")).to.be.false
+        })
         it("should validate complex structure", function () {
             expect(validate(
                 { foo: { bar: "bar", baz: 42 } },
