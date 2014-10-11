@@ -8,10 +8,12 @@ module.exports = function (grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
         "bower-install-simple": {
-            options: {
-                color:       true,
-                production:  true,
-                directory:   "bower_components"
+            "main": {
+                options: {
+                    color:       true,
+                    production:  true,
+                    directory:   "bower_components"
+                }
             }
         },
         copy: {
@@ -24,7 +26,7 @@ module.exports = function (grunt) {
                 dest: "lib/nunjucks/nunjucks.js"
             },
             "jquery": {
-                src: [ "bower_components/jquery/jquery.js" ],
+                src: [ "bower_components/jquery/dist/jquery.js" ],
                 dest: "lib/jquery/jquery.js"
             },
             "jquery-markup": {
@@ -36,7 +38,7 @@ module.exports = function (grunt) {
                 dest: "lib/director/director.js"
             },
             "swiper": {
-                src: [ "bower_components/swiper/dist/idangerous.swiper-2.4.1.js" ],
+                src: [ "bower_components/swiper/dist/idangerous.swiper.min.js" ],
                 dest: "lib/swiper/idangerous.swiper.js"
             },
             "swiper-css": {
@@ -44,18 +46,19 @@ module.exports = function (grunt) {
                 dest: "lib/swiper/idangerous.swiper.css"
             },
             "swiper-plugins": {
-                files: [{
-                    expand: true, flatten: true, filter: "isFile",
-                    src: "bower_components/swiper/plugins/*/idangerous.swiper.[a-z]*[a-z].js",
-                    dest: "lib/swiper/"
-                }]
+                files: {
+                    "lib/swiper/idangerous.swiper.scrollbar.js":  "bower_components/swiper-scrollbar/dist/idangerous.swiper.scrollbar.js",
+                    "lib/swiper/idangerous.swiper.scrollbar.css": "bower_components/swiper-scrollbar/dist/idangerous.swiper.scrollbar.css",
+                    "lib/swiper/idangerous.swiper.hashnav.js":    "bower_components/swiper-hash-navigation/dist/idangerous.swiper.hashnav.js",
+                    "lib/swiper/idangerous.swiper.progress.css":  "bower_components/swiper-smooth-progress/dist/idangerous.swiper.progress.js"
+                }
             },
             "highlight": {
                 src: [ "bower_components/highlightjs/highlight.pack.js" ],
                 dest: "lib/highlight/highlight.js"
             },
             "sanitize": {
-                src: [ "bower_components/sanitize.css/sanitize.css" ],
+                src: [ "bower_components/sanitize.css/dist/sanitize.css" ],
                 dest: "lib/sanitize/sanitize.css"
             },
             "font-awesome-css": {

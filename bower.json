@@ -1,16 +1,19 @@
 {
     "name": "ducky",
     "dependencies": {
-        "sanitize.css":       "2.0.0",
-        "font-awesome":       "4.0.3",
-        "jquery":             "2.1.1",
-        "jquery-markup":      "1.0.28",
-        "nunjucks":           "1.0.4",
-        "director":           "1.2.2",
-        "lodash":             "2.4.1",
-        "swiper":             "2.6.0",
-        "highlightjs":        "8.0.0",
-        "gridless":           "1.0.1",
-        "typopro":            "2.0.3"
+        "sanitize.css":           "2.0.0",
+        "font-awesome":           "4.2.0",
+        "jquery":                 "2.1.1",
+        "jquery-markup":          "1.0.32",
+        "nunjucks":               "1.1.0",
+        "director":               "1.2.2",
+        "lodash":                 "2.4.1",
+        "swiper":                 "2.7.0",
+        "swiper-scrollbar":       "2.4.1",
+        "swiper-hash-navigation": "1.0.0",
+        "swiper-smooth-progress": "1.1.0",
+        "highlightjs":            "8.0.0",
+        "gridless":               "1.0.2",
+        "typopro":                "2.2.5"
     }
 }
