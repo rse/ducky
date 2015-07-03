@@ -29,11 +29,11 @@
 /* global expect: true */
 
 global.chai = require("chai")
-chai.use(require("chai-fuzzy"));
+chai.use(require("chai-fuzzy"))
 global.expect = global.chai.expect
 global.chai.config.includeStack = true
 
-var ducky = require("../lib/ducky.js")
+var ducky = require("../lib/ducky.node.js")
 var validate = ducky.validate
 
 describe("Ducky", function () {
@@ -67,9 +67,9 @@ describe("Ducky", function () {
             expect(validate(new RegExp(), "RegExp")).to.be.true
             var Foo = function () {}
             expect(validate(new Foo(), "Foo")).to.be.false
-            ducky.register("Foo", Foo);
+            ducky.register("Foo", Foo)
             var Quux = function () {}
-            ducky.register("foo.bar.Quux", Quux);
+            ducky.register("foo.bar.Quux", Quux)
             expect(validate(new Quux(), "foo.bar.Quux")).to.be.true
         })
         it("should validate arrays with arities", function () {

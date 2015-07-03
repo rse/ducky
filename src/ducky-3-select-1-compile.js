@@ -24,37 +24,39 @@
 
 var select_compile = function (spec) {
     /*  result and state variables  */
-    var path = [];
-    var pos = 0;
+    let path = []
+    let pos = 0
 
     /*  iterate over selection specification  */
-    var m;
-    var txt = spec;
+    let m
+    let txt = spec
     while (txt !== "") {
         /*  case 1: standard path segment  */
         if ((m = txt.match(/^\s*(?:\.)?\s*([a-zA-Z$0-9_][a-zA-Z$0-9_:-]*)/)) !== null)
-            path.push(m[1]);
+            path.push(m[1])
         /*  case 2: numerical array-style dereference  */
         else if ((m = txt.match(/^\s*\[\s*(\d+|\*{1,2})\s*\]/)) !== null)
-            path.push(m[1]);
+            path.push(m[1])
         /*  case 3: double-quoted string array-style dereference  */
         else if ((m = txt.match(/^\s*\[\s*"((?:\\"|.)*?)"\s*\]/)) !== null)
-            path.push(m[1].replace(/\\"/g, "\""));
+            path.push(m[1].replace(/\\"/g, "\""))
         /*  case 4: single-quoted string array-style dereference  */
         else if ((m = txt.match(/^\s*\[\s*'((?:\\'|.)*?)'\s*\]/)) !== null)
-            path.push(m[1].replace(/\\'/g, "'"));
+            path.push(m[1].replace(/\\'/g, "'"))
         /*  skip all whitespaces between segments  */
         else if ((m = txt.match(/^\s+$/)) !== null)
-            break;
+            break
         else
             throw new Error("select: parse error: invalid character at: " +
-                spec.substr(0, pos) + "<" + txt.substr(0, 1) + ">" + txt.substr(1));
+                spec.substr(0, pos) + "<" + txt.substr(0, 1) + ">" + txt.substr(1))
 
         /*  advance parsing position  */
-        pos += m[0].length;
-        txt = txt.substr(m[0].length);
+        pos += m[0].length
+        txt = txt.substr(m[0].length)
     }
 
-    return path;
-};
+    return path
+}
+
+export { select_compile }
 

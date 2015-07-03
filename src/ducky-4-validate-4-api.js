@@ -22,56 +22,57 @@
 **  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+import { validate_tokenize } from "./ducky-4-validate-1-tokenize.js"
+import { validate_parse    } from "./ducky-4-validate-2-parse.js"
+import { validate_execute  } from "./ducky-4-validate-3-execute.js"
+
 /*  internal compile cache  */
-var validate_cache = {};
+let validate_cache = {}
 
 /*  API function: validate an arbitrary value against a validation DSL  */
-ducky.validate = function (value, spec) {
+var validate = function (value, spec) {
     /*  sanity check arguments  */
     if (arguments.length !== 2)
-        throw new Error("validate: invalid number of arguments: \"" +
-            arguments.length + "\" (exactly 2 expected)");
+        throw new Error(`validate: invalid number of arguments: ${arguments.length} (exactly 2 expected)`)
     if (typeof spec !== "string")
-        throw new Error("validate: invalid specification argument: \"" +
-            spec + "\" (string expected)");
+        throw new Error(`validate: invalid specification argument: "${spec}" (string expected)`)
 
     /*  compile validation AST from specification
         or reuse cached pre-compiled validation AST  */
-    var ast = validate_cache[spec];
+    var ast = validate_cache[spec]
     if (typeof ast === "undefined") {
-        ast = ducky.validate.compile(spec);
-        validate_cache[spec] = ast;
+        ast = validate.compile(spec)
+        validate_cache[spec] = ast
     }
 
     /*  execute validation AST against the value  */
-    return ducky.validate.execute(value, ast);
-};
+    return validate.execute(value, ast)
+}
 
-ducky.validate.compile = function (spec) {
+validate.compile = function (spec) {
     /*  sanity check arguments  */
     if (arguments.length !== 1)
-        throw new Error("validate: invalid number of arguments: \"" +
-            arguments.length + "\" (exactly 1 expected)");
+        throw new Error(`validate: invalid number of arguments: ${arguments.length} (exactly 1 expected)`)
     if (typeof spec !== "string")
-        throw new Error("validate: invalid specification argument: \"" +
-            spec + "\" (string expected)");
+        throw new Error(`validate: invalid specification argument: "${spec}" (string expected)`)
 
     /*  tokenize the specification string into a token stream */
-    var token = validate_tokenize(spec);
+    var token = validate_tokenize(spec)
 
     /*  parse the token stream into an AST  */
-    var ast = validate_parse.parse_spec(token);
+    var ast = validate_parse.parse_spec(token)
 
-    return ast;
-};
+    return ast
+}
 
-ducky.validate.execute = function (value, ast) {
+validate.execute = function (value, ast) {
     /*  sanity check arguments  */
     if (arguments.length !== 2)
-        throw new Error("validate: invalid number of arguments: \"" +
-            arguments.length + "\" (exactly 2 expected)");
+        throw new Error(`validate: invalid number of arguments: ${arguments.length} (exactly 2 expected)`)
 
     /*  execute validation AST against the value  */
-    return validate_execute.exec_spec(value, ast);
-};
+    return validate_execute.exec_spec(value, ast)
+}
+
+export { validate }
 

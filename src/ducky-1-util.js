@@ -23,110 +23,113 @@
 */
 
 /*  custom Token class  */
-var Token = function () {
-    this.name   = "";
-    this.text   = "";
-    this.tokens = [];
-    this.pos    = 0;
-    this.len    = 0;
-};
-Token.prototype = {
+class Token {
+    constructor () {
+        this.name   = ""
+        this.text   = ""
+        this.tokens = []
+        this.pos    = 0
+        this.len    = 0
+    }
+
     /*  setter for caller context name  */
-    setName: function (name) {
-        this.name = name;
-    },
+    setName (name) {
+        this.name = name
+    }
 
     /*  setter for plain-text input  */
-    setText: function (text) {
-        this.text = text;
-    },
+    setText (text) {
+        this.text = text
+    }
 
     /*  setter for additional token symbols  */
-    addToken: function (b1, b2, e2, e1, symbol) {
-        this.tokens.push({ b1: b1, b2: b2, e2: e2, e1: e1, symbol: symbol });
-        this.len++;
-    },
+    addToken (b1, b2, e2, e1, symbol) {
+        this.tokens.push({ b1: b1, b2: b2, e2: e2, e1: e1, symbol: symbol })
+        this.len++
+    }
 
     /*  peek at the next token or token at particular offset  */
-    peek: function (offset) {
+    peek (offset) {
         if (typeof offset === "undefined")
-            offset = 0;
+            offset = 0
         if (offset >= this.len)
-            throw new Error(this.name + ": parse error: not enough tokens");
-        return this.tokens[this.pos + offset].symbol;
-    },
+            throw new Error(`${this.name}: parse error: not enough tokens`)
+        return this.tokens[this.pos + offset].symbol
+    }
 
     /*  skip one or more tokens  */
-    skip: function (len) {
+    skip (len) {
         if (typeof len === "undefined")
-            len = 1;
+            len = 1
         if (len > this.len)
-            throw new Error(this.name + ": parse error: not enough tokens available to skip: " + this.ctx());
-        this.pos += len;
-        this.len -= len;
-    },
+            throw new Error(`${this.name}: parse error: not enough tokens available to skip: ${this.ctx()}`)
+        this.pos += len
+        this.len -= len
+    }
 
     /*  consume the current token (by expecting it to be a particular symbol)  */
-    consume: function (symbol) {
+    consume (symbol) {
         if (this.len <= 0)
-            throw new Error(this.name + ": parse error: no more tokens available to consume: " + this.ctx());
+            throw new Error(`${this.name}: parse error: no more tokens available to consume: ${this.ctx()}`)
         if (this.tokens[this.pos].symbol !== symbol)
-            throw new Error(this.name + ": parse error: expected token symbol \"" + symbol + "\": " + this.ctx());
-        this.pos++;
-        this.len--;
-    },
+            throw new Error(`${this.name}: parse error: expected token symbol "${symbol}": ${this.ctx()}`)
+        this.pos++
+        this.len--
+    }
 
     /*  return a textual description of the token parsing context  */
-    ctx: function (width) {
+    ctx (width) {
         if (typeof width === "undefined")
-            width = 78;
-        var tok = this.tokens[this.pos];
+            width = 78
+        let tok = this.tokens[this.pos]
 
         /*  the current token itself  */
-        var ctx = "<" + this.text.substr(tok.b2, tok.e2 - tok.b2 + 1) + ">";
-        ctx = this.text.substr(tok.b1, tok.b2 - tok.b1) + ctx;
-        ctx = ctx + this.text.substr(tok.e2 + 1, tok.e1 - tok.e2);
+        let ctx = "<" + this.text.substr(tok.b2, tok.e2 - tok.b2 + 1) + ">"
+        ctx = this.text.substr(tok.b1, tok.b2 - tok.b1) + ctx
+        ctx = ctx + this.text.substr(tok.e2 + 1, tok.e1 - tok.e2)
 
         /*  the previous and following token(s)  */
-        var k = (width - ctx.length);
+        let k = (width - ctx.length)
         if (k > 0) {
-            k = Math.floor(k / 2);
-            var i, str;
+            k = Math.floor(k / 2)
+            let i, str
             if (this.pos > 0) {
                 /*  previous token(s)  */
-                var k1 = 0;
+                let k1 = 0
                 for (i = this.pos - 1; i >= 0; i--) {
-                    tok = this.tokens[i];
-                    str = this.text.substr(tok.b1, tok.e1 - tok.b1 + 1);
-                    k1 += str.length;
+                    tok = this.tokens[i]
+                    str = this.text.substr(tok.b1, tok.e1 - tok.b1 + 1)
+                    k1 += str.length
                     if (k1 > k)
-                        break;
-                    ctx = str + ctx;
+                        break
+                    ctx = str + ctx
                 }
                 if (i > 0)
-                    ctx = "[...]" + ctx;
+                    ctx = "[...]" + ctx
             }
             if (this.len > 1) {
                 /*  following token(s)  */
-                var k2 = 0;
+                let k2 = 0
                 for (i = this.pos + 1; i < this.pos + this.len; i++) {
-                    tok = this.tokens[i];
-                    str = this.text.substr(tok.b1, tok.e1 - tok.b1 + 1);
-                    k2 += str.length;
+                    tok = this.tokens[i]
+                    str = this.text.substr(tok.b1, tok.e1 - tok.b1 + 1)
+                    k2 += str.length
                     if (k2 > k)
-                        break;
-                    ctx = ctx + str;
+                        break
+                    ctx = ctx + str
                 }
                 if (i < this.pos + this.len)
-                    ctx = ctx + "[...]";
+                    ctx = ctx + "[...]"
             }
         }
 
         /*  place everything on a single line through escape sequences  */
         ctx = ctx.replace(/\r/, "\\r")
                  .replace(/\n/, "\\n")
-                 .replace(/\t/, "\\t");
-        return ctx;
+                 .replace(/\t/, "\\t")
+        return ctx
     }
-};
+}
+
+export { Token }
 

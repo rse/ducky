@@ -29,11 +29,11 @@
 /* global expect: true */
 
 global.chai = require("chai")
-chai.use(require("chai-fuzzy"));
+chai.use(require("chai-fuzzy"))
 global.expect = global.chai.expect
 global.chai.config.includeStack = true
 
-var ducky = require("../lib/ducky.js")
+var ducky = require("../lib/ducky.node.js")
 var select = ducky.select
 
 describe("Ducky", function () {
@@ -45,23 +45,23 @@ describe("Ducky", function () {
                     quux: 42
                 }
             }
-        };
+        }
         it("should correctly get value", function () {
-            expect(select(obj, "")).to.be.equal(obj);
-            expect(select(obj, "   ")).to.be.equal(obj);
-            expect(select(obj, "foo")).to.be.equal(obj.foo);
-            expect(select(obj, "foo.bar")).to.be.equal(obj.foo.bar);
-            expect(select(obj, "foo.bar.baz[0]")).to.be.equal(obj.foo.bar.baz[0]);
-            expect(select(obj, "foo.bar.baz[4]")).to.be.equal(obj.foo.bar.baz[4]);
-            expect(select(obj, "foo['bar'].baz[4]")).to.be.equal(obj.foo.bar.baz[4]);
-            expect(select(obj, "['foo']['bar'][\"baz\"]['4']")).to.be.equal(obj.foo.bar.baz[4]);
-            expect(select(obj, " [ 'foo' ] [ 'bar'] [ \"baz\" ][ '4' ] ")).to.be.equal(obj.foo.bar.baz[4]);
-        });
+            expect(select(obj, "")).to.be.equal(obj)
+            expect(select(obj, "   ")).to.be.equal(obj)
+            expect(select(obj, "foo")).to.be.equal(obj.foo)
+            expect(select(obj, "foo.bar")).to.be.equal(obj.foo.bar)
+            expect(select(obj, "foo.bar.baz[0]")).to.be.equal(obj.foo.bar.baz[0])
+            expect(select(obj, "foo.bar.baz[4]")).to.be.equal(obj.foo.bar.baz[4])
+            expect(select(obj, "foo['bar'].baz[4]")).to.be.equal(obj.foo.bar.baz[4])
+            expect(select(obj, "['foo']['bar'][\"baz\"]['4']")).to.be.equal(obj.foo.bar.baz[4])
+            expect(select(obj, " [ 'foo' ] [ 'bar'] [ \"baz\" ][ '4' ] ")).to.be.equal(obj.foo.bar.baz[4])
+        })
         it("should correctly set value", function () {
-            var old = obj.foo.bar.baz;
-            expect(select(obj, "foo.bar.baz", { marker: 42 })).to.be.equal(old);
-            expect(obj).to.be.like({ foo: { bar: { baz: { marker: 42 }, quux: 42 }}});
-        });
-    });
+            var old = obj.foo.bar.baz
+            expect(select(obj, "foo.bar.baz", { marker: 42 })).to.be.equal(old)
+            expect(obj).to.be.like({ foo: { bar: { baz: { marker: 42 }, quux: 42 }}})
+        })
+    })
 })
 

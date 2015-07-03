@@ -22,29 +22,29 @@
 **  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+import { select_compile } from "./ducky-3-select-1-compile.js"
+import { select_execute } from "./ducky-3-select-2-execute.js"
+
 /*  the internal compile cache  */
-var select_cache = {};
+let select_cache = {}
 
 /*  API function: select an arbitrary value via a path specification
     and either get the current value or set the new value  */
-ducky.select = function (obj, spec, value) {
+var select = function (obj, spec, value) {
     /*  sanity check arguments  */
     if (arguments.length < 2)
-        throw new Error("select: invalid number of arguments: \"" +
-            arguments.length + "\" (minimum of 2 expected)");
+        throw new Error(`select: invalid number of arguments: ${arguments.length} (minimum of 2 expected)`)
     else if (arguments.length > 3)
-        throw new Error("select: invalid number of arguments: \"" +
-            arguments.length + "\" (maximum of 3 expected)");
+        throw new Error(`select: invalid number of arguments: ${arguments.length} (maximum of 3 expected)`)
     if (typeof spec !== "string")
-        throw new Error("select: invalid specification argument: \"" +
-            spec + "\" (string expected)");
+        throw new Error(`select: invalid specification argument: "${spec}" (string expected)`)
 
     /*  compile select path from specification
         or reuse cached pre-compiled selection path  */
-    var path = select_cache[spec];
+    let path = select_cache[spec]
     if (typeof path === "undefined") {
-        path = select_compile(spec);
-        select_cache[spec] = path;
+        path = select_compile(spec)
+        select_cache[spec] = path
     }
 
     /*  execute the object selection  */
@@ -52,33 +52,30 @@ ducky.select = function (obj, spec, value) {
           arguments.length === 2
         ? select_execute(obj, path)
         : select_execute(obj, path, value)
-    );
-};
+    )
+}
 
 /*  compile a path specification into array of dereferencing steps  */
-ducky.select.compile = function (spec) {
+select.compile = function (spec) {
     /*  sanity check argument  */
     if (arguments.length !== 1)
-        throw new Error("select: invalid number of arguments: \"" +
-            arguments.length + "\" (exactly 1 expected)");
+        throw new Error(`select: invalid number of arguments: ${arguments.length} (exactly 1 expected)`)
     if (typeof spec !== "string")
-        throw new Error("select: invalid specification argument: \"" +
-            spec + "\" (string expected)");
-    return select_compile.apply(undefined, arguments);
-};
+        throw new Error(`select: invalid specification argument: "${spec}" (string expected)`)
+    return select_compile.apply(undefined, arguments)
+}
 
 /*  execute object selection  */
-ducky.select.execute = function (obj, path) {
+select.execute = function (obj, path) {
     /*  sanity check arguments  */
     if (arguments.length < 2)
-        throw new Error("select: invalid number of arguments: \"" +
-            arguments.length + "\" (minimum of 2 expected)");
+        throw new Error(`select: invalid number of arguments: ${arguments.length} (minimum of 2 expected)`)
     else if (arguments.length > 3)
-        throw new Error("select: invalid number of arguments: \"" +
-            arguments.length + "\" (maximum of 3 expected)");
+        throw new Error(`select: invalid number of arguments: ${arguments.length} (maximum of 3 expected)`)
     if (!(typeof path === "object" && path instanceof Array))
-        throw new Error("select: invalid path argument: \"" +
-            path + "\" (array expected)");
-    return select_execute.apply(undefined, arguments);
-};
+        throw new Error(`select: invalid path argument: "${path}" (array expected)`)
+    return select_execute.apply(undefined, arguments)
+}
+
+export { select }
 

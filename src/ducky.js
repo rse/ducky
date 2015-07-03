@@ -22,32 +22,15 @@
 **  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-/*  Universal Module Definition (UMD)  */
-(function (root, name, factory) {
-    /* global define: false */
-    /* global module: false */
-    if (typeof define === "function" && typeof define.amd !== "undefined")
-        /*  AMD environment  */
-        define(name, function () { return factory(root); });
-    else if (typeof module === "object" && typeof module.exports === "object")
-        /*  CommonJS environment  */
-        module.exports = factory(root);
-    else
-        /*  Browser environment  */
-        root[name] = factory(root);
-}(this, "ducky", function (/* root */) {
-    var ducky = {};
-    include("ducky-0-version.js");
-    include("ducky-1-util.js");
-    include("ducky-2-registry.js");
-    include("ducky-3-select-1-compile.js");
-    include("ducky-3-select-2-execute.js");
-    include("ducky-3-select-3-api.js");
-    include("ducky-4-validate-1-tokenize.js");
-    include("ducky-4-validate-2-parse.js");
-    include("ducky-4-validate-3-execute.js");
-    include("ducky-4-validate-4-api.js");
-    include("ducky-5-params.js");
-    return ducky;
-}));
+import { version              } from "./ducky-0-version.js"
+import { register, unregister } from "./ducky-2-registry-2-api.js"
+import { select               } from "./ducky-3-select-3-api.js"
+import { validate             } from "./ducky-4-validate-4-api.js"
+import { params               } from "./ducky-5-params.js"
+
+export { version              }
+export { register, unregister }
+export { select               }
+export { validate             }
+export { params               }
 

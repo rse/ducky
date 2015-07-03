@@ -22,29 +22,20 @@
 **  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-/* global require: true */
-/* global global: true */
-/* global describe: true */
-/* global it: true */
-/* global expect: true */
+/*  internal type registry  */
+var registry = {}
 
-global.chai = require("chai")
-chai.use(require("chai-fuzzy"))
-global.expect = global.chai.expect
-global.chai.config.includeStack = true
+/*  pre-fill type registry with JavaScript standard types  */
+let std_types = [
+    "Object",  "Boolean", "Number",  "String",  "Function",
+    "RegExp",  "Array",   "Date",    "Error",
+    "Set",     "Map",     "WeakMap", "Promise", "Proxy", "Iterator"
+]
 
-var ducky = require("../lib/ducky.node.js")
-var version = ducky.version
+/* global global: false */
+for (let i = 0; i < std_types.length; i++)
+    if (typeof global[std_types[i]] === "function")
+        registry[std_types[i]] = global[std_types[i]]
 
-describe("Ducky", function () {
-    describe("version", function () {
-        it("should be a reasonable one", function () {
-            expect(version).to.have.keys([ "major", "minor", "micro", "date" ])
-            expect(version.major).to.be.a("number").least(0)
-            expect(version.minor).to.be.a("number").least(0)
-            expect(version.micro).to.be.a("number").least(0)
-            expect(version.date ).to.be.a("number").least(20130101)
-        })
-    })
-})
+export { registry }
 

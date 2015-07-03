@@ -22,30 +22,34 @@
 **  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+import { Token } from "./ducky-1-util.js"
+
 /*  tokenize the validation specification  */
 var validate_tokenize = function (spec) {
     /*  create new Token abstraction  */
-    var token = new Token();
-    token.setName("validate");
-    token.setText(spec);
+    var token = new Token()
+    token.setName("validate")
+    token.setText(spec)
 
     /*  determine individual token symbols  */
-    var m;
-    var b = 0;
+    let m
+    let b = 0
     while (spec !== "") {
-        m = spec.match(/^(\s*)([^{}\[\]:,?*+()!|\s]+|[{}\[\]:,?*+()!|])(\s*)/);
+        m = spec.match(/^(\s*)([^{}\[\]:,?*+()!|\s]+|[{}\[\]:,?*+()!|])(\s*)/)
         if (m === null)
-            throw new Error("validate: parse error: cannot further canonicalize: \"" + spec + "\"");
+            throw new Error(`validate: parse error: cannot further canonicalize: "${spec}"`)
         token.addToken(
             b,
             b + m[1].length,
             b + m[1].length + m[2].length - 1,
             b + m[0].length - 1,
             m[2]
-        );
-        spec = spec.substr(m[0].length);
-        b += m[0].length;
+        )
+        spec = spec.substr(m[0].length)
+        b += m[0].length
     }
-    return token;
-};
+    return token
+}
+
+export { validate_tokenize }
 

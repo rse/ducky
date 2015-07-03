@@ -24,27 +24,62 @@
 
 /* global module: true */
 module.exports = function (grunt) {
-    grunt.loadNpmTasks("grunt-expand-include");
     grunt.loadNpmTasks("grunt-contrib-jshint");
-    grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-contrib-clean");
-    grunt.loadNpmTasks("grunt-eslint");
     grunt.loadNpmTasks("grunt-mocha-test");
+    grunt.loadNpmTasks("grunt-browserify");
+    grunt.loadNpmTasks("grunt-eslint");
 
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
         version: grunt.file.readYAML("VERSION.yml"),
-        "expand-include": {
-            "ducky": {
-                src: [ "src/ducky.js" ],
-                dest: "lib/ducky.js",
+        browserify: {
+            "ducky-browser": {
+                files: {
+                    "lib/ducky.browser.js": [ "src/ducky.js" ]
+                },
                 options: {
-                    directiveSyntax: "js",
-                    globalDefines: {
-                        major: "<%= version.major %>",
-                        minor: "<%= version.minor %>",
-                        micro: "<%= version.micro %>",
-                        date:  "<%= version.date  %>"
+                    transform: [
+                        [ "browserify-replace", { replace: [
+                            { from: /\$major/g, to: "<%= version.major %>" },
+                            { from: /\$minor/g, to: "<%= version.minor %>" },
+                            { from: /\$micro/g, to: "<%= version.micro %>" },
+                            { from: /\$date/g,  to: "<%= version.date  %>" }
+                        ]}],
+                        "babelify"
+                    ],
+                    plugin: [
+                        [ "minifyify", { map: "ducky.browser.map", output: "lib/ducky.browser.map" } ],
+                        [ "browserify-derequire" ],
+                        [ "browserify-header" ]
+                    ],
+                    browserifyOptions: {
+                        standalone: "Ducky",
+                        debug: true
+                    }
+                }
+            },
+            "ducky-node": {
+                files: {
+                    "lib/ducky.node.js": [ "src/ducky.js" ]
+                },
+                options: {
+                    transform: [
+                        [ "browserify-replace", { replace: [
+                            { from: /\$major/g, to: "<%= version.major %>" },
+                            { from: /\$minor/g, to: "<%= version.minor %>" },
+                            { from: /\$micro/g, to: "<%= version.micro %>" },
+                            { from: /\$date/g,  to: "<%= version.date  %>" }
+                        ]}],
+                        "babelify"
+                    ],
+                    plugin: [
+                        [ "browserify-derequire" ],
+                        [ "browserify-header" ]
+                    ],
+                    browserifyOptions: {
+                        standalone: "Ducky",
+                        debug: false
                     }
                 }
             }
@@ -53,14 +88,15 @@ module.exports = function (grunt) {
             options: {
                 jshintrc: "jshint.json"
             },
-            gruntfile:   [ "Gruntfile.js" ],
-            "ducky":  [ "lib/ducky.js" ]
+            gruntfile:  [ "Gruntfile.js" ],
+            "ducky": [ "src/**/*.js" ]
         },
         eslint: {
             options: {
                 config: "eslint.json"
             },
-            target: [ "lib/ducky.js" ],
+            gruntfile:  [ "Gruntfile.js" ],
+            "ducky": [ "src/**/*.js" ]
         },
         mochaTest: {
             "ducky": {
@@ -70,22 +106,12 @@ module.exports = function (grunt) {
                 reporter: "spec"
             }
         },
-        uglify: {
-            options: {
-                preserveComments: "some",
-                report: "min"
-            },
-            dist: {
-                src:  "lib/ducky.js",
-                dest: "lib/ducky.min.js"
-            }
-        },
         clean: {
             clean:     [ "lib/*", "lib" ],
             distclean: [ "node_modules" ]
         }
     });
 
-    grunt.registerTask("default", [ "expand-include", "jshint", "eslint", "mochaTest", "uglify" ]);
+    grunt.registerTask("default", [ "jshint", "eslint", "browserify", "mochaTest" ]);
 };
 

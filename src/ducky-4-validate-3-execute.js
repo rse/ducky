@@ -22,67 +22,68 @@
 **  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+import { registered } from "./ducky-2-registry-2-api.js"
+
 var validate_execute = {
     /*  validate specification (top-level)  */
-    exec_spec: function (value, node) {
-        var valid = false;
+    exec_spec (value, node) {
+        let valid = false
         if (node !== null) {
             switch (node.type) {
-                case "not":     valid = this.exec_not(    value, node); break;
-                case "or":      valid = this.exec_or(     value, node); break;
-                case "hash":    valid = this.exec_hash(   value, node); break;
-                case "array":   valid = this.exec_array(  value, node); break;
-                case "primary": valid = this.exec_primary(value, node); break;
-                case "class":   valid = this.exec_class(  value, node); break;
-                case "any":     valid = true;                           break;
+                case "not":     valid = this.exec_not(    value, node); break
+                case "or":      valid = this.exec_or(     value, node); break
+                case "hash":    valid = this.exec_hash(   value, node); break
+                case "array":   valid = this.exec_array(  value, node); break
+                case "primary": valid = this.exec_primary(value, node); break
+                case "class":   valid = this.exec_class(  value, node); break
+                case "any":     valid = true;                           break
                 default:
-                    throw new Error("validate: invalid validation AST: " +
-                        "node has unknown type \"" + node.type + "\"");
+                    throw new Error(`validate: invalid validation AST: node has unknown type "${node.type}"`)
             }
         }
-        return valid;
+        return valid
     },
 
     /*  validate through boolean "not" operation  */
-    exec_not: function (value, node) {
-        return !this.exec_spec(value, node.op);  /*  RECURSION  */
+    exec_not (value, node) {
+        return !this.exec_spec(value, node.op)  /*  RECURSION  */
     },
 
     /*  validate through boolean "or" operation  */
-    exec_or: function (value, node) {
+    exec_or (value, node) {
         return (
                this.exec_spec(value, node.op1)  /*  RECURSION  */
             || this.exec_spec(value, node.op2)  /*  RECURSION  */
-        );
+        )
     },
 
     /*  validate hash type  */
-    exec_hash: function (value, node) {
-        var i, el;
-        var valid = (typeof value === "object");
-        var fields = {};
-        var field;
+    exec_hash (value, node) {
+        let i, el
+        let valid = (typeof value === "object")
+        let fields = {}
+        let field
         if (valid) {
             /*  pass 1: ensure that all mandatory fields exist
                 and determine map of valid fields for pass 2  */
-            var hasAnyKeys = false;
+            let hasAnyKeys = false
             for (field in value) {
                 if (   !Object.hasOwnProperty.call(value, field)
                     || !Object.propertyIsEnumerable.call(value, field)
                     || field === "constructor"
                     || field === "prototype"                          )
-                    continue;
-                hasAnyKeys = true;
-                break;
+                    continue
+                hasAnyKeys = true
+                break
             }
             for (i = 0; i < node.elements.length; i++) {
-                el = node.elements[i];
-                fields[el.key] = el.element;
+                el = node.elements[i]
+                fields[el.key] = el.element
                 if (   el.arity[0] > 0
                     && (   (el.key === "@" && !hasAnyKeys)
                         || (el.key !== "@" && typeof value[el.key] === "undefined"))) {
-                    valid = false;
-                    break;
+                    valid = false
+                    break
                 }
             }
         }
@@ -94,61 +95,64 @@ var validate_execute = {
                     || !Object.propertyIsEnumerable.call(value, field)
                     || field === "constructor"
                     || field === "prototype"                          )
-                    continue;
+                    continue
                 if (   typeof fields[field] !== "undefined"
                     && this.exec_spec(value[field], fields[field])) /*  RECURSION  */
-                    continue;
+                    continue
                 if (   typeof fields["@"] !== "undefined"
                     && this.exec_spec(value[field], fields["@"]))   /*  RECURSION  */
-                    continue;
-                valid = false;
-                break;
+                    continue
+                valid = false
+                break
             }
         }
-        return valid;
+        return valid
     },
 
     /*  validate array type  */
-    exec_array: function (value, node) {
-        var i, el;
-        var valid = (typeof value === "object" && value instanceof Array);
+    exec_array (value, node) {
+        let i, el
+        let valid = (typeof value === "object" && value instanceof Array)
         if (valid) {
-            var pos = 0;
+            let pos = 0
             for (i = 0; i < node.elements.length; i++) {
-                el = node.elements[i];
-                var found = 0;
+                el = node.elements[i]
+                let found = 0
                 while (found < el.arity[1] && pos < value.length) {
                     if (!this.exec_spec(value[pos], el.element))  /*  RECURSION  */
-                        break;
-                    found++;
-                    pos++;
+                        break
+                    found++
+                    pos++
                 }
                 if (found < el.arity[0]) {
-                    valid = false;
-                    break;
+                    valid = false
+                    break
                 }
             }
             if (pos < value.length)
-                valid = false;
+                valid = false
         }
-        return valid;
+        return valid
     },
 
     /*  validate standard JavaScript type  */
-    exec_primary: function (value, node) {
-        return (node.name === "null" && value === null) || (typeof value === node.name);
+    exec_primary (value, node) {
+        return (node.name === "null" && value === null) || (typeof value === node.name)
     },
 
     /*  validate custom JavaScript type  */
-    exec_class: function (value, node) {
+    exec_class (value, node) {
+        let type = registered(node.name)
         return (
                typeof value === "object"
             && (
                   Object.prototype.toString.call(value) === "[object " + node.name + "]"
-               || (   typeof registry[node.name] === "function"
-                   && value instanceof registry[node.name])
+               || (   typeof type === "function"
+                   && value instanceof type     )
             )
-        );
+        )
     }
-};
+}
+
+export { validate_execute }
 

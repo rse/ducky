@@ -1,4 +1,6 @@
 {
+    "esnext":        true,
+    "asi":           true,
     "maxerr":        200,
     "bitwise":       true,
     "camelcase":     false,

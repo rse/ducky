@@ -2,7 +2,7 @@
     "name": "ducky",
     "version": "2.1.3",
     "description": "Duck-Typed Value Handling for JavaScript",
-    "main": "./lib/ducky.js",
+    "main": "./lib/ducky.browser.js",
     "homepage": "http://duckyjs.com",
     "license": "MIT",
     "authors": [

@@ -27,39 +27,41 @@ var select_execute = function (obj, path) {
     /*  handle special case of empty path */
     if (path.length === 0) {
         if (arguments.length === 3)
-            throw new Error("select: cannot set value on empty path");
+            throw new Error("select: cannot set value on empty path")
         else
-            return obj;
+            return obj
     }
 
     /*  step into object graph according to path prefix  */
-    var i = 0;
+    let i = 0
     while (i < path.length - 1) {
         if (typeof obj !== "object")
-            throw new Error("select: cannot further dereference: no more intermediate objects in path");
-        obj = obj[path[i++]];
+            throw new Error("select: cannot further dereference: no more intermediate objects in path")
+        obj = obj[path[i++]]
     }
 
     /*  get the old value  */
     if (typeof obj !== "object")
-        throw new Error("select: cannot further dereference: no object at end of path");
-    var value_old = obj[path[i]];
+        throw new Error("select: cannot further dereference: no object at end of path")
+    let value_old = obj[path[i]]
 
     /*  optionally set new value  */
     if (arguments.length === 3) {
-        var value_new = arguments[2];
+        let value_new = arguments[2]
         if (value_new === undefined) {
             /*  delete value from collection  */
             if (obj instanceof Array)
-                obj.splice(parseInt(path[i], 10), 1);
+                obj.splice(parseInt(path[i], 10), 1)
             else
-                delete obj[path[i]];
+                delete obj[path[i]]
         }
         else
             /*  set value into collection  */
-            obj[path[i]] = value_new;
+            obj[path[i]] = value_new
     }
 
-    return value_old;
-};
+    return value_old
+}
+
+export { select_execute }
 

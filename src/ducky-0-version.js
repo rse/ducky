@@ -22,11 +22,18 @@
 **  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
+/* global $major: false */
+/* global $minor: false */
+/* global $micro: false */
+/* global $date:  false */
+
 /*  API version  */
-ducky.version = {
+var version = {
     major: $major,
     minor: $minor,
     micro: $micro,
     date:  $date
-};
+}
+
+export { version }
 

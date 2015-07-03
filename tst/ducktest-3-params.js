@@ -29,11 +29,11 @@
 /* global expect: true */
 
 global.chai = require("chai")
-chai.use(require("chai-fuzzy"));
+chai.use(require("chai-fuzzy"))
 global.expect = global.chai.expect
 global.chai.config.includeStack = true
 
-var ducky = require("../lib/ducky.js")
+var ducky = require("../lib/ducky.node.js")
 
 describe("Ducky", function () {
     describe("params()", function () {
@@ -44,14 +44,14 @@ describe("Ducky", function () {
                     enabled: { pos: 1,     def: false, valid: "boolean"     },
                     spec:    { pos: 2,     def: [],    valid: "[ number* ]" },
                     other:   { pos: "...", def: [],    valid: "[ number* ]" }
-                });
-                expect(params.name).to.be.equal("bar");
-                expect(params.enabled).be.equal(true);
-                expect(params.spec).be.like([ 42, 7 ]);
-                expect(params.other).be.like([ 1, 2, 3 ]);
+                })
+                expect(params.name).to.be.equal("bar")
+                expect(params.enabled).be.equal(true)
+                expect(params.spec).be.like([ 42, 7 ])
+                expect(params.other).be.like([ 1, 2, 3 ])
             };
-            foo("bar", true, [ 42, 7 ], 1, 2, 3);
-            foo({ name: "bar", enabled: true, spec: [ 42, 7 ], other: [ 1, 2, 3 ] });
+            foo("bar", true, [ 42, 7 ], 1, 2, 3)
+            foo({ name: "bar", enabled: true, spec: [ 42, 7 ], other: [ 1, 2, 3 ] })
             expect(function () { foo() }).to.throw(Error)
             expect(function () { foo({ quux: "quux" }) }).to.throw(Error)
         })
