@@ -111,7 +111,7 @@ Compile the selection specification `path` into an AST.
 
 Select from `object` a value via `ast` and either return it or set it to the new value `value`.
 
-#### ducky.validate(object: Object, spec: String): Boolean
+#### ducky.validate(object: Object, spec: String, errors?: String[]): Boolean
 
 Validate an arbitrary nested JavaScript object `object` against the
 specification `spec`. The specification `spec` has to be a string
@@ -137,6 +137,9 @@ The special key `@` can be used to match an arbitrary hash element key.
     ducky.validate({ foo: "Foo", bar: "Bar", baz: [ 42, 7, "Quux" ] },
         "{ foo: string, bar: any, baz: [ number+, string* ], quux?: any }") // &arr; true
 
+If an empty `errors` array is given, use it to assemble detailed error
+messages in case of a validation failure.
+
 In case caching of the internally compiled Abstract Syntax Tree (AST)
 is not wishes, you can perform the compile and execute steps
 of `ducky.validate` individually:
@@ -145,9 +148,11 @@ of `ducky.validate` individually:
 
 Compile the validation specification `spec` into an AST.
 
-##### ducky.validate.execute(object: Object, ast: Object): Boolean
+##### ducky.validate.execute(object: Object, ast: Object, errors?: String[]): Boolean
 
 Validate `object` against `ast` and return `true` in case it validates.
+If an empty `errors` array is given, use it to assemble detailed error
+messages in case of a validation failure.
 
 #### ducky.params(name: String, args: Object[], spec: Object): Object
 
