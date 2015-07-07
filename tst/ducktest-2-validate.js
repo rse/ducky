@@ -120,6 +120,17 @@ describe("Ducky", function () {
                 "{ foo: { bar: string, baz: [ number* ], quux?: string } }"
             )).to.be.true
         })
+        it("should correctly report errors", function () {
+            var errors = []
+            expect(validate(true, "string", errors)).to.be.false
+            expect(errors).to.have.length(1)
+            expect(errors[0]).to.match(/^mismatch at path "":.*/)
+            errors = []
+            expect(validate([ 42, "foo" ], "[ number, boolean ]", errors)).to.be.false
+            expect(errors).to.have.length(2)
+            expect(errors[0]).to.match(/^mismatch at path "\[1\]":.*/)
+            expect(errors[1]).to.match(/^mismatch at path "\[1\]":.*/)
+        })
     })
 })
 
