@@ -30,10 +30,12 @@ import { validate_execute  } from "./ducky-4-validate-3-execute.js"
 let validate_cache = {}
 
 /*  API function: validate an arbitrary value against a validation DSL  */
-var validate = function (value, spec) {
+var validate = function (value, spec, errors) {
     /*  sanity check arguments  */
-    if (arguments.length !== 2)
-        throw new Error(`validate: invalid number of arguments: ${arguments.length} (exactly 2 expected)`)
+    if (arguments.length < 2)
+        throw new Error(`validate: invalid number of arguments: ${arguments.length} (minimum of 2 expected)`)
+    else if (arguments.length > 3)
+        throw new Error(`validate: invalid number of arguments: ${arguments.length} (maximum of 3 expected)`)
     if (typeof spec !== "string")
         throw new Error(`validate: invalid specification argument: "${spec}" (string expected)`)
 
@@ -46,7 +48,7 @@ var validate = function (value, spec) {
     }
 
     /*  execute validation AST against the value  */
-    return validate.execute(value, ast)
+    return validate.execute(value, ast, errors)
 }
 
 validate.compile = function (spec) {
@@ -65,13 +67,17 @@ validate.compile = function (spec) {
     return ast
 }
 
-validate.execute = function (value, ast) {
+validate.execute = function (value, ast, errors) {
     /*  sanity check arguments  */
-    if (arguments.length !== 2)
-        throw new Error(`validate: invalid number of arguments: ${arguments.length} (exactly 2 expected)`)
+    if (arguments.length < 2)
+        throw new Error(`validate: invalid number of arguments: ${arguments.length} (minimum of 2 expected)`)
+    else if (arguments.length > 3)
+        throw new Error(`validate: invalid number of arguments: ${arguments.length} (maximum of 3 expected)`)
+    if (arguments.length < 3 || typeof errors === "undefined")
+        errors = null
 
     /*  execute validation AST against the value  */
-    return validate_execute.exec_spec(value, ast)
+    return validate_execute.exec_spec(value, ast, "", errors)
 }
 
 export { validate }
