@@ -46,7 +46,7 @@ module.exports = function (grunt) {
                             { from: /\$micro/g, to: "<%= version.micro %>" },
                             { from: /\$date/g,  to: "<%= version.date  %>" }
                         ]}],
-                        "babelify"
+                        [ "babelify", { presets: [ "es2015" ] } ]
                     ],
                     plugin: [
                         [ "minifyify", { map: "ducky.browser.map", output: "lib/ducky.browser.map" } ],
@@ -71,7 +71,7 @@ module.exports = function (grunt) {
                             { from: /\$micro/g, to: "<%= version.micro %>" },
                             { from: /\$date/g,  to: "<%= version.date  %>" }
                         ]}],
-                        "babelify"
+                        [ "babelify", { presets: [ "es2015" ] } ]
                     ],
                     plugin: [
                         [ "browserify-derequire" ],
