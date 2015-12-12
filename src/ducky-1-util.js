@@ -84,12 +84,12 @@ class Token {
         let tok = this.tokens[this.pos]
 
         /*  the current token itself  */
-        let ctx = "<" + this.text.substr(tok.b2, tok.e2 - tok.b2 + 1) + ">"
-        ctx = this.text.substr(tok.b1, tok.b2 - tok.b1) + ctx
-        ctx = ctx + this.text.substr(tok.e2 + 1, tok.e1 - tok.e2)
+        let context = "<" + this.text.substr(tok.b2, tok.e2 - tok.b2 + 1) + ">"
+        context = this.text.substr(tok.b1, tok.b2 - tok.b1) + context
+        context = context + this.text.substr(tok.e2 + 1, tok.e1 - tok.e2)
 
         /*  the previous and following token(s)  */
-        let k = (width - ctx.length)
+        let k = (width - context.length)
         if (k > 0) {
             k = Math.floor(k / 2)
             let i, str
@@ -102,10 +102,10 @@ class Token {
                     k1 += str.length
                     if (k1 > k)
                         break
-                    ctx = str + ctx
+                    context = str + context
                 }
                 if (i > 0)
-                    ctx = "[...]" + ctx
+                    context = "[...]" + context
             }
             if (this.len > 1) {
                 /*  following token(s)  */
@@ -116,18 +116,18 @@ class Token {
                     k2 += str.length
                     if (k2 > k)
                         break
-                    ctx = ctx + str
+                    context = context + str
                 }
                 if (i < this.pos + this.len)
-                    ctx = ctx + "[...]"
+                    context = context + "[...]"
             }
         }
 
         /*  place everything on a single line through escape sequences  */
-        ctx = ctx.replace(/\r/, "\\r")
-                 .replace(/\n/, "\\n")
-                 .replace(/\t/, "\\t")
-        return ctx
+        context = context.replace(/\r/, "\\r")
+            .replace(/\n/, "\\n")
+            .replace(/\t/, "\\t")
+        return context
     }
 }
 
