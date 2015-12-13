@@ -28,9 +28,12 @@ import { select               } from "./ducky-3-select-3-api.js"
 import { validate             } from "./ducky-4-validate-4-api.js"
 import { params               } from "./ducky-5-params.js"
 
-export { version              }
-export { register, unregister }
-export { select               }
-export { validate             }
-export { params               }
+module.exports = {
+    version,
+    register,
+    unregister,
+    select,
+    validate,
+    params
+}
 
