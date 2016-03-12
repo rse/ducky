@@ -124,7 +124,7 @@ describe("Ducky", function () {
             var errors = []
             expect(validate(true, "string", errors)).to.be.false
             expect(errors).to.have.length(1)
-            expect(errors[0]).to.match(/^mismatch at path "":.*/)
+            expect(errors[0]).to.match(/^mismatch at root-level:.*/)
             errors = []
             expect(validate([ 42, "foo" ], "[ number, boolean ]", errors)).to.be.false
             expect(errors).to.have.length(2)
