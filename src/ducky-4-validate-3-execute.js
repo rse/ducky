@@ -24,6 +24,14 @@
 
 import { registered } from "./ducky-2-registry-2-api.js"
 
+/*  provide a reasonable context information for error messages  */
+var errCtx = (path, msg) => {
+    if (path === "")
+        return `mismatch at root-level: ${msg}`
+    else
+        return `mismatch at path "${path}": ${msg}`
+}
+
 var validate_execute = {
     /*  validate specification (top-level)  */
     exec_spec (value, node, path, errors) {
@@ -97,9 +105,9 @@ var validate_execute = {
                     valid = false
                     if (errors !== null) {
                         if (el.key === "@")
-                            errors.push(`mismatch at path "${path}": mandatory element under arbitrary key not found`)
+                            errors.push(errCtx(path, "mandatory element under arbitrary key not found"))
                         else
-                            errors.push(`mismatch at path "${path}": mandatory element under key "${el.key}" not found`)
+                            errors.push(errCtx(path, `mandatory element under key "${el.key}" not found`))
                     }
                     else
                         break
@@ -119,7 +127,7 @@ var validate_execute = {
                 if (   typeof fields[field] === "undefined"
                     && typeof fields["@"]   === "undefined"
                     && errors !== null                     )
-                    errors.push(`mismatch at path "${path}": element under key "${field}" unexpected`)
+                    errors.push(errCtx(path, `element under key "${field}" unexpected`))
                 if (   typeof fields[field] !== "undefined"
                     && this.exec_spec(value[field], fields[field], `${path}${sep}${field}`, errors)) /*  RECURSION  */
                     continue
@@ -139,7 +147,7 @@ var validate_execute = {
         let i, el
         let valid = (typeof value === "object" && value instanceof Array)
         if (!valid && errors !== null)
-            errors.push(`mismatch at path "${path}": found type "${typeof value}", expected array`)
+            errors.push(errCtx(path, `found type "${typeof value}", expected array`))
         else if (valid) {
             let pos = 0
             let err = null
@@ -162,9 +170,9 @@ var validate_execute = {
                 }
                 if (found < el.arity[0]) {
                     if (errors !== null)
-                        errors.push(`mismatch at path "${path}[${pos}]": ` +
+                        errors.push(errCtx(`${path}[${pos}]`,
                             `found only ${found} elements of array element type #${i}, ` +
-                            `expected at least ${el.arity[0]} elements`)
+                            `expected at least ${el.arity[0]} elements`))
                     valid = false
                     break
                 }
@@ -179,8 +187,8 @@ var validate_execute = {
             /*  in case more elements are available without matching nodes  */
             else if (pos < value.length) {
                 if (errors !== null)
-                    errors.push(`mismatch at path "${path}": matched only ${pos} elements, ` +
-                        `but ${value.length} elements found`)
+                    errors.push(errCtx(path, `matched only ${pos} elements, ` +
+                        `but ${value.length} elements found`))
                 valid = false
             }
         }
@@ -191,7 +199,7 @@ var validate_execute = {
     exec_primary (value, node, path, errors) {
         let valid = (node.name === "null" && value === null) || (typeof value === node.name)
         if (!valid && errors !== null)
-            errors.push(`mismatch at path "${path}": found type "${typeof value}", expected primary type "${node.name}"`)
+            errors.push(errCtx(path, `found type "${typeof value}", expected primary type "${node.name}"`))
         return valid
     },
 
@@ -207,7 +215,7 @@ var validate_execute = {
             )
         )
         if (!valid && errors !== null)
-            errors.push(`mismatch at path "${path}": found type "${typeof value}", expected class type "${node.name}"`)
+            errors.push(errCtx(path, `found type "${typeof value}", expected class type "${node.name}"`))
         return valid
     }
 }
