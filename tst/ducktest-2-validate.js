@@ -88,11 +88,11 @@ describe("Ducky", function () {
             expect(validate([ 42, "foo" ], "[ any{1,2} ]")).to.be.true
         })
         it("should validate arrays as tuples", function () {
-            expect(validate([ "foo", 42, true ], "[ string, number, boolean ])")).to.be.true
-            expect(validate([ "foo", 42, 7, true ], "[ string, number+, boolean ])")).to.be.true
-            expect(validate([ "foo", 42, 7, true ], "[ string, number*, boolean ])")).to.be.true
-            expect(validate([ "foo", 42, 7, true ], "[ string, number{1,2}, boolean ])")).to.be.true
-            expect(validate([ "foo", 42, 7, 0, true ], "[ string, number{1,2}, boolean ])")).to.be.false
+            expect(validate([ "foo", 42, true ], "[ string, number, boolean ]")).to.be.true
+            expect(validate([ "foo", 42, 7, true ], "[ string, number+, boolean ]")).to.be.true
+            expect(validate([ "foo", 42, 7, true ], "[ string, number*, boolean ]")).to.be.true
+            expect(validate([ "foo", 42, 7, true ], "[ string, number{1,2}, boolean ]")).to.be.true
+            expect(validate([ "foo", 42, 7, 0, true ], "[ string, number{1,2}, boolean ]")).to.be.false
         })
         it("should validate hashes with arities", function () {
             expect(validate({}, "{}")).to.be.true
@@ -130,6 +130,9 @@ describe("Ducky", function () {
             expect(errors).to.have.length(2)
             expect(errors[0]).to.match(/^mismatch at path "\[1\]":.*/)
             expect(errors[1]).to.match(/^mismatch at path "\[1\]":.*/)
+            expect(function () { validate.compile("{}")  }).to.not.throw(Error)
+            expect(function () { validate.compile("{}}") }).to.throw(Error)
+            expect(function () { validate.compile("") }).to.throw(Error)
         })
     })
 })

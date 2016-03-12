@@ -24,6 +24,17 @@
 
 /*  parse specification  */
 var validate_parse = {
+    parse (token) {
+        if (token.len <= 0)
+            return null
+        let ast = this.parse_spec(token)
+        let symbol = token.peek()
+        if (symbol !== null)
+            throw new Error(`validate: parse error: unexpected token (expected end-of-string): "${token.ctx()}"`)
+        return ast
+    },
+
+    /*  parse a specification  */
     parse_spec (token) {
         if (token.len <= 0)
             return null

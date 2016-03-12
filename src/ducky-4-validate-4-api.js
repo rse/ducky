@@ -62,7 +62,7 @@ validate.compile = function (spec) {
     var token = validate_tokenize(spec)
 
     /*  parse the token stream into an AST  */
-    var ast = validate_parse.parse_spec(token)
+    var ast = validate_parse.parse(token)
 
     return ast
 }

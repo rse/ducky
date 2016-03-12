@@ -48,6 +48,7 @@ var validate_tokenize = function (spec) {
         spec = spec.substr(m[0].length)
         b += m[0].length
     }
+    token.addToken(b, b, b, b, null)
     return token
 }
 
