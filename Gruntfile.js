@@ -93,7 +93,7 @@ module.exports = function (grunt) {
         },
         eslint: {
             options: {
-                config: "eslint.json"
+                configFile: "eslint.json"
             },
             gruntfile:  [ "Gruntfile.js" ],
             "ducky": [ "src/**/*.js" ]
