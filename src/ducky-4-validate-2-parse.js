@@ -48,6 +48,8 @@ var validate_parse = {
             ast = this.parse_hash(token)
         else if (symbol === "[")
             ast = this.parse_array(token)
+        else if (symbol === "/")
+            ast = this.parse_regexp(token)
         else if (symbol.match(/^(?:null|undefined|boolean|number|string|function|object)$/))
             ast = this.parse_primary(token)
         else if (symbol === "any")
@@ -118,6 +120,32 @@ var validate_parse = {
         return ast
     },
 
+    /*  parse regular expression specification  */
+    parse_regexp (token) {
+        token.consume("/")
+        let text = ""
+        while (token.len >= 1) {
+            if (token.peek(0) === "/")
+                break
+            else if (token.len >= 2 && token.peek(0) === "\\" && token.peek(1) === "/") {
+                text += token.peek(1)
+                token.skip(2)
+            }
+            else {
+                text += token.peek(0)
+                token.skip(1)
+            }
+        }
+        token.consume("/")
+        let regexp
+        try { regexp = new RegExp(text) }
+        catch (ex) {
+            throw new Error(`validate: parse error: invalid regular expression "${text}": ${ex.message}`)
+        }
+        let ast = { type: "regexp", regexp: regexp }
+        return ast
+    },
+
     /*  parse primary type specification  */
     parse_primary (token) {
         let primary = token.peek()
@@ -161,6 +189,16 @@ var validate_parse = {
                  : parseInt(token.peek(3), 10))
             ]
             token.skip(5)
+        }
+        else if (   token.len >= 3
+                 && token.peek(0) === "{"
+                 && token.peek(1).match(/^[0-9]+$/)
+                 && token.peek(2) === "}"          ) {
+            arity = [
+                parseInt(token.peek(1), 10),
+                parseInt(token.peek(1), 10)
+            ]
+            token.skip(3)
         }
         else if (
                token.len >= 1

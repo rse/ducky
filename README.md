@@ -120,7 +120,7 @@ structure and RegExp-like quantifiers):
 
 LHS          |     | RHS
 ------------ | --- | -----------------------------
-spec         | ::= | not &#124; alt &#124; hash &#124; array &#124; any &#124; primary &#124; class
+spec         | ::= | not &#124; alt &#124; hash &#124; array &#124; any &#124; regexp &#124; primary &#124; class
 not          | ::= | `"!"` spec
 alt          | ::= | `"("` spec (`"`&#124;`"` spec)\* `")"`
 hash         | ::= | `"{"` (key arity? `":"` spec (`","` key arity? `":"` spec)\*)? `"}"`
@@ -129,6 +129,7 @@ arity        | ::= | `"?"` &#124; `"*"` &#124; `"+"` &#124; `"{"` number `","` (
 number       | ::= | `/^[0-9]+$/`
 key          | ::= | `/^[_a-zA-Z$][_a-zA-Z$0-9]*$/` &#124; `"@"`
 any          | ::= | `"any"`
+regexp       | ::= | `/^\/(?:\\\/|.)*\/$/`
 primary      | ::= | `/^(?:null|undefined|boolean|number|string|function|object)$/`
 class        | ::= | `/^[_a-zA-Z$][_a-zA-Z$0-9]\*(?:\.[_a-zA-Z$][_a-zA-Z$0-9]\*)\*$/`
 

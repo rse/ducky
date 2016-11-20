@@ -48,6 +48,11 @@ describe("Ducky", function () {
             expect(validate("foo", "string")).to.be.true
             expect(validate(function () {}, "function")).to.be.true
         })
+        it("should validate stand-alone string with regular expression", function () {
+            expect(validate("foo", "/foo/")).to.be.true
+            expect(validate("foo", "/fo+/")).to.be.true
+            expect(validate("foo", "/bar/")).to.be.false
+        })
         it("should validate stand-alone object", function () {
             expect(validate(null, "object")).to.be.true
             expect(validate({}, "object")).to.be.true
@@ -116,8 +121,8 @@ describe("Ducky", function () {
                 "{ foo: { bar: string, baz: [ number* ] } }"
             )).to.be.false
             expect(validate(
-                { foo: { bar: "bar", baz: [ 7, 42 ], quux: "quux" } },
-                "{ foo: { bar: string, baz: [ number* ], quux?: string } }"
+                { foo: { bar: [ "foo", "bar" ], baz: [ 7, 42 ], quux: "quux" } },
+                "{ foo: { bar: [ /^(?:foo|bar)$/{2} ], baz: [ number* ], quux?: string } }"
             )).to.be.true
         })
         it("should correctly report errors", function () {

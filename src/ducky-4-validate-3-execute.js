@@ -42,6 +42,7 @@ var validate_execute = {
                 case "or":      valid = this.exec_or(     value, node, path, errors); break
                 case "hash":    valid = this.exec_hash(   value, node, path, errors); break
                 case "array":   valid = this.exec_array(  value, node, path, errors); break
+                case "regexp":  valid = this.exec_regexp( value, node, path, errors); break
                 case "primary": valid = this.exec_primary(value, node, path, errors); break
                 case "class":   valid = this.exec_class(  value, node, path, errors); break
                 case "any":     valid = true;                                         break
@@ -192,6 +193,14 @@ var validate_execute = {
                 valid = false
             }
         }
+        return valid
+    },
+
+    /*  validate regular expression  */
+    exec_regexp (value, node, path, errors) {
+        let valid = node.regexp.test(value.toString())
+        if (!valid && errors !== null)
+            errors.push(errCtx(path, `value failed to match regular expression ${node.regexp.toString()}`))
         return valid
     },
 
