@@ -188,7 +188,7 @@ by the `validate>()` method).
 License
 -------
 
-Copyright (c) 2010-2016 Ralf S. Engelschall (http://engelschall.com/)
+Copyright (c) 2010-2017 Ralf S. Engelschall (http://engelschall.com/)
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
