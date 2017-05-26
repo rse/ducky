@@ -131,6 +131,9 @@ describe("Ducky", function () {
             expect(errors).to.have.length(1)
             expect(errors[0]).to.match(/^mismatch at root-level:.*/)
             errors = []
+            expect(validate(null, "{}", errors)).to.be.false
+            expect(errors).to.have.length(1)
+            errors = []
             expect(validate([ 42, "foo" ], "[ number, boolean ]", errors)).to.be.false
             expect(errors).to.have.length(2)
             expect(errors[0]).to.match(/^mismatch at path "\[1\]":.*/)

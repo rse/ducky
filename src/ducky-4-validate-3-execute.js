@@ -79,11 +79,15 @@ var validate_execute = {
     /*  validate hash type  */
     exec_hash (value, node, path, errors) {
         let i, el
-        let valid = (typeof value === "object")
+        let valid = (typeof value === "object" && value !== null)
         let fields = {}
         let field
-        if (!valid && errors !== null)
-            errors.push(`mismatch at path "${path}": found type "${typeof value}", expected hash`)
+        if (!valid && errors !== null) {
+            if (value === null)
+                errors.push(`mismatch at path "${path}": found "null", expected hash`)
+            else
+                errors.push(`mismatch at path "${path}": found type "${typeof value}", expected hash`)
+        }
         else if (valid) {
             /*  pass 1: ensure that all mandatory fields exist
                 and determine map of valid fields for pass 2  */
