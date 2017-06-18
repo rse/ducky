@@ -31,7 +31,6 @@ var options = function (spec, input) {
 
     /*  prepare output by creating the structure and setting default values  */
     let required = []
-    let optional = []
     const prepare = (path) => {
         /*  fetch and act on current value of specification  */
         let val = select(spec, path.join("."))
@@ -69,7 +68,6 @@ var options = function (spec, input) {
                     throw new Error(`options: invalid option specification at "${path.join(".")}" ` +
                         `(validation does not match default value): ${errors.join("; ")}`)
                 out[path[i]] = val[1]
-                optional.push(path.join("."))
             }
             else
                 required.push(path.join("."))
