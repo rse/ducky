@@ -43,13 +43,13 @@ var options = function (spec, input) {
             }
         }
         else if (typeof val === "object" && val instanceof Array && val !== null) {
-            /*  option element */
-            if (val.length < 0 || val.length > 2)
+            /*  option element  */
+            if (val.length <= 0 || val.length > 2)
                 throw new Error(`options: invalid option specification at "${path.join(".")}" ` +
                     "(expected array of length 1 or 2)")
             if (typeof val[0] !== "string")
                 throw new Error(`options: invalid option specification at "${path.join(".")}[0]" ` +
-                    "(expected type string)")
+                    "(expected string type)")
 
             /*  create parent structure in output  */
             let out = output, i = 0
@@ -62,15 +62,17 @@ var options = function (spec, input) {
 
             /*  handle value  */
             if (val.length === 2) {
-                /*  handle default value  */
+                /*  handle optional value (via default value)  */
                 let errors = []
                 if (!validate(val[1], val[0], errors))
                     throw new Error(`options: invalid option specification at "${path.join(".")}" ` +
                         `(validation does not match default value): ${errors.join("; ")}`)
                 out[path[i]] = val[1]
             }
-            else
+            else {
+                /*  handle required value (via remembering)  */
                 required.push(path.join("."))
+            }
         }
         else
             throw new Error(`options: invalid option specification at "${path}" (expected object or array)`)
@@ -85,29 +87,31 @@ var options = function (spec, input) {
             initially = false
             for (let i = 0; i < required.length; i++)
                 if (select(input, required[i]) === undefined)
-                    throw new Error(`options: required value for option "${required[i]}" missing`)
+                    throw new Error(`options: value for required option "${required[i]}" missing`)
         }
 
         /*  merge values into output  */
-        const merge = (path, val) => {
+        const mergeInternal = (path, val) => {
             let info = select(spec, path)
             if (typeof info !== "object")
                 throw new Error(`options: value provided for unknown option "${path}" (invalid path)`)
             if (!(info instanceof Array)) {
+                /*  option structure  */
                 for (let name in val) {
                     if (!Object.hasOwnProperty.call(val, name))
                         continue
-                    merge(path === "" ? name : `${path}.${name}`, val[name]) /* RECURSION */
+                    mergeInternal(path === "" ? name : `${path}.${name}`, val[name]) /* RECURSION */
                 }
             }
             else {
+                /*  option element  */
                 let errors = []
                 if (!validate(val, info[0], errors))
                     throw new Error(`options: invalid value for option "${path}": ${errors.join("; ")}`)
                 select(this, path, val)
             }
         }
-        merge("", input)
+        mergeInternal("", input)
         return this
     }
 
