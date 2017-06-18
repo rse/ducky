@@ -19,7 +19,8 @@
     "bugs": {
         "url":  "http://github.com/rse/ducky/issues"
     },
-    "main": "./lib/ducky.node.js",
+    "main":    "./lib/ducky.node.js",
+    "browser": "./lib/ducky.browser.js",
     "devDependencies": {
         "grunt":                "~1.0.1",
         "grunt-cli":            "~1.2.0",
