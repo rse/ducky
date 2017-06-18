@@ -27,6 +27,7 @@ import { register, unregister } from "./ducky-2-registry-2-api.js"
 import { select               } from "./ducky-3-select-3-api.js"
 import { validate             } from "./ducky-4-validate-4-api.js"
 import { params               } from "./ducky-5-params.js"
+import { options              } from "./ducky-6-options.js"
 
 module.exports = {
     version,
@@ -34,6 +35,7 @@ module.exports = {
     unregister,
     select,
     validate,
-    params
+    params,
+    options
 }
 

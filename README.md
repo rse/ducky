@@ -33,7 +33,7 @@ You can conveniently get Ducky in various ways:
   `$ git clone https://github.com/rse/ducky.git`
 
 - cURL: download only the main file from the repository:<br/>
-  `$ curl -O https://raw.github.com/rse/ducky/master/lib/ducky.js`
+  `$ curl -O https://raw.github.com/rse/ducky/master/lib/ducky.browser.js`
 
 API
 ---
@@ -184,6 +184,33 @@ by the `validate>()` method).
     var value = config("foo", "bar");
     config("foo", "bar", "quux");
     config({ scope: "foo", key: "bar", value: "quux", force: true });
+
+#### ducky.options(spec: Object, options?: Object): Object
+
+Manage configuration option objects. Parameter `spec` is the option
+object specification: each key is the name of a parameter (or a
+sub-path) and the value has to be an `Array` with a type specification
+accepted by the `validate()` method as its first element and optionally
+a default value as the second element. If no default value is given
+for an option, it has to exist on initial value merging. Value
+merging is performed either when the `options` parameter is
+given or method `merge(options: Object): Object` is called
+on the resulting option object.
+
+    function config (options) {
+        var options = ducky.options({
+            foo:      [ "string"           ],
+            bar:      [ "boolean", false   ],
+            quux:     [ "number",  1.2     ],
+            sub: {
+                foo:  [ "string",  "dummy" ],
+                bar:  [ "boolean", false   ],
+                quux: [ "number",  2.4     ]
+            }
+        });
+        options.merge({ foo: "bar", sub: { bar: true } })
+        options.merge({ sub: { quux: 4.8 } })
+    }
 
 License
 -------
