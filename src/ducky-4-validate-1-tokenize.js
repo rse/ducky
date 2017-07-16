@@ -35,7 +35,7 @@ var validate_tokenize = function (spec) {
     let m
     let b = 0
     while (spec !== "") {
-        m = spec.match(/^(\s*)([^{}\[\]:,?*+()!|/\s]+|[{}\[\]:,?*+()!|/])(\s*)/)
+        m = spec.match(/^(\s*)([^\\{}\[\]:,?*+()!|/\s]+|[\\{}\[\]:,?*+()!|/])(\s*)/)
         if (m === null)
             throw new Error(`validate: parse error: cannot further canonicalize: "${spec}"`)
         token.addToken(
