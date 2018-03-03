@@ -1,6 +1,6 @@
 ##
-##  sprintf.js -- POSIX sprintf(3)-style String Formatting for JavaScript
-##  Copyright (c) 2006-2017 Ralf S. Engelschall <rse@engelschall.com>
+##  Ducky -- Duck-Typed Value Handling for JavaScript
+##  Copyright (c) 2010-2018 Ralf S. Engelschall <rse@engelschall.com>
 ##
 ##  Permission is hereby granted, free of charge, to any person obtaining
 ##  a copy of this software and associated documentation files (the
@@ -38,8 +38,4 @@ clean: bootstrap
 
 distclean: bootstrap
 	@$(GRUNT) clean:clean clean:distclean
-
-update-package-json: bootstrap
-	$(NPM) install npm-check-updates
-	./node_modules/npm-check-updates/bin/npm-check-updates -u
 
