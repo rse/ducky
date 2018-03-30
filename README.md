@@ -23,9 +23,6 @@ Getting Ducky
 
 You can conveniently get Ducky in various ways:
 
-- Bower: install as client component via the Bower component manager:<br/>
-  `$ bower install ducky`
-
 - NPM: install as server component via the Node Package Manager:<br/>
   `$ npm install ducky`
 
