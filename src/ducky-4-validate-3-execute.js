@@ -202,7 +202,8 @@ var validate_execute = {
 
     /*  validate regular expression  */
     exec_regexp (value, node, path, errors) {
-        let valid = node.regexp.test(value.toString())
+        let valid = (value !== null && typeof value.toString === "function" ?
+            node.regexp.test(value.toString()) : false)
         if (!valid && errors !== null)
             errors.push(errCtx(path, `value failed to match regular expression ${node.regexp.toString()}`))
         return valid
