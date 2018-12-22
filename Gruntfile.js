@@ -45,16 +45,24 @@ module.exports = function (grunt) {
                             { from: /\$micro/g, to: "<%= version.micro %>" },
                             { from: /\$date/g,  to: "<%= version.date  %>" }
                         ]}],
-                        [ "babelify", { presets: [ "es2015" ] } ]
+                        [ "babelify", {
+                            presets: [
+                                [ "@babel/preset-env", {
+                                    "targets": {
+                                        "browsers": "last 8 versions, > 1%, ie 11"
+                                    }
+                                } ]
+                            ]
+                        } ],
+                        [ "uglifyify", { sourceMap: false, global: true } ]
                     ],
                     plugin: [
-                        [ "minifyify", { map: "ducky.browser.map", output: "lib/ducky.browser.map" } ],
                         [ "browserify-derequire" ],
                         [ "browserify-header" ]
                     ],
                     browserifyOptions: {
                         standalone: "Ducky",
-                        debug: true
+                        debug: false
                     }
                 }
             },
@@ -70,7 +78,15 @@ module.exports = function (grunt) {
                             { from: /\$micro/g, to: "<%= version.micro %>" },
                             { from: /\$date/g,  to: "<%= version.date  %>" }
                         ]}],
-                        [ "babelify", { presets: [ "es2015" ] } ]
+                        [ "babelify", {
+                            presets: [
+                                [ "@babel/preset-env", {
+                                    "targets": {
+                                        "node": "8.0.0"
+                                    }
+                                } ]
+                            ]
+                        } ]
                     ],
                     plugin: [
                         [ "browserify-derequire" ],
