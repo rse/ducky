@@ -57,7 +57,7 @@
                                 <div class="g-row">
                                     <div class="g-off-1-12 g-col-6-12">
 <div data-syntax="javascript" class="sample">
-var config = {
+const config = {
     foo: "TheFoo",
     bar: [ "TheBar", true, 1, 7, 42 ],
     quux: [
@@ -117,7 +117,7 @@ ducky.validate(config, `{
                                 <div class="g-row">
                                     <div class="g-off-1-12 g-col-6-12">
 <div data-syntax="javascript" class="sample">
-var config = {
+const config = {
     foo: "TheFoo",
     bar: [ "TheBar", true, 1, 7, 42 ],
     quux: [
@@ -170,13 +170,13 @@ ducky.select(config, "['quux'][2][\"name\"]") // &rarr; "NewValue"
                                 <div class="g-row">
                                     <div class="g-off-1-12 g-col-6-12">
 <div data-syntax="javascript" class="sample">
-var greet = function () {
-    var params = ducky.params("foo", arguments, {
+const greet = function () {
+    const params = ducky.params("foo", arguments, {
         hello: {             def: "Hello", valid: "string" },
         what:  { pos: 0,     def: "World", valid: "string" },
         more:  { pos: "...", def: [], valid: "[ number* ]" },
     });
-    var result = params.hello + " " + params.what;
+    let result = params.hello + " " + params.what;
     params.more.forEach(function (num) {
         result += ", " + num;
     });
