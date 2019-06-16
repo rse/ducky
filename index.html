@@ -69,21 +69,19 @@ var config = {
     ]
 };</div>
 <div data-syntax="javascript" class="sample">
-ducky.validate(config,
-    "{" +
-    "  foo: string," +
-    "  bar: [" +
-    "      string," +
-    "      boolean{0,2}," +
-    "      number+" +
-    "  ]," +
-    "  quux: [ {" +
-    "      id: number," +
-    "      name: string," +
-    "      enabled?: boolean," +
-    "  }* ]" +
-    "}"
-) // &rarr; true;
+ducky.validate(config, `{
+    foo: string,
+    bar: [
+        string,
+        boolean{0,2},
+        number+
+    ],
+    quux: [ {
+        id: number,
+        name: string,
+        enabled?: boolean,
+    }* ]
+}`) // &rarr; true;
 </div>
                                     </div>
                                     <div class="g-col-3-12" style="padding-left: 40px;">
