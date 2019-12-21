@@ -32,7 +32,6 @@ let std_types = [
     "Set",     "Map",     "WeakMap", "Promise", "Proxy", "Iterator"
 ]
 
-/* global global: false */
 for (let i = 0; i < std_types.length; i++)
     if (typeof global[std_types[i]] === "function")
         registry[std_types[i]] = global[std_types[i]]
