@@ -21,6 +21,7 @@
     },
     "main":    "./lib/ducky.node.js",
     "browser": "./lib/ducky.browser.js",
+    "types":   "./src/ducky.d.ts",
     "devDependencies": {
         "grunt":                  "1.5.3",
         "grunt-cli":              "1.4.3",
