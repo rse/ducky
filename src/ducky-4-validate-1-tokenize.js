@@ -25,9 +25,9 @@
 import { Token } from "./ducky-1-util.js"
 
 /*  tokenize the validation specification  */
-var validate_tokenize = function (spec) {
+const validate_tokenize = function (spec) {
     /*  create new Token abstraction  */
-    var token = new Token()
+    const token = new Token()
     token.setName("validate")
     token.setText(spec)
 
@@ -35,7 +35,7 @@ var validate_tokenize = function (spec) {
     let m
     let b = 0
     while (spec !== "") {
-        m = spec.match(/^(\s*)([^\\{}\[\]:,?*+()!|/\s]+|[\\{}\[\]:,?*+()!|/])(\s*)/)
+        m = spec.match(/^(\s*)([^\\{}[\]:,?*+()!|/\s]+|[\\{}[\]:,?*+()!|/])(\s*)/)
         if (m === null)
             throw new Error(`validate: parse error: cannot further canonicalize: "${spec}"`)
         token.addToken(

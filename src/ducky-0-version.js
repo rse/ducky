@@ -28,7 +28,7 @@
 /* global $date:  false */
 
 /*  API version  */
-var version = {
+const version = {
     major: $major,
     minor: $minor,
     micro: $micro,

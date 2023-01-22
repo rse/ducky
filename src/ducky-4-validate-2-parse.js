@@ -23,7 +23,7 @@
 */
 
 /*  parse specification  */
-var validate_parse = {
+const validate_parse = {
     parse (token) {
         if (token.len <= 0)
             return null
@@ -107,8 +107,8 @@ var validate_parse = {
         token.consume("[")
         let elements = []
         while (token.peek() !== "]") {
-            var spec = this.parse_spec(token)  /*  RECURSION  */
-            var arity = this.parse_arity(token, "?*+")
+            const spec = this.parse_spec(token)  /*  RECURSION  */
+            const arity = this.parse_arity(token, "?*+")
             elements.push({ type: "element", element: spec, arity: arity })
             if (token.peek() === ",")
                 token.skip()
@@ -184,9 +184,9 @@ var validate_parse = {
             && token.peek(4) === "}"          ) {
             arity = [
                 parseInt(token.peek(1), 10),
-                (  token.peek(3) === "oo"
-                 ? Number.MAX_VALUE
-                 : parseInt(token.peek(3), 10))
+                ( token.peek(3) === "oo" ?
+                    Number.MAX_VALUE
+                    : parseInt(token.peek(3), 10))
             ]
             token.skip(5)
         }
@@ -201,7 +201,7 @@ var validate_parse = {
             token.skip(3)
         }
         else if (
-               token.len >= 1
+            token.len >= 1
             && token.peek().length === 1
             && charset.indexOf(token.peek()) >= 0) {
             let c = token.peek()
@@ -217,7 +217,7 @@ var validate_parse = {
 
     /*  parse hash key specification  */
     parse_key (token) {
-        var key = token.peek()
+        const key = token.peek()
         if (!key.match(/^(?:[_a-zA-Z$][_a-zA-Z$0-9]*|@)$/))
             throw new Error(`validate: parse error: invalid key "${key}"`)
         token.skip()

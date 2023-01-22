@@ -30,7 +30,7 @@ let select_cache = {}
 
 /*  API function: select an arbitrary value via a path specification
     and either get the current value or set the new value  */
-var select = function (obj, spec, value) {
+const select = function (obj, spec, value) {
     /*  sanity check arguments  */
     if (arguments.length < 2)
         throw new Error(`select: invalid number of arguments: ${arguments.length} (minimum of 2 expected)`)
@@ -48,9 +48,8 @@ var select = function (obj, spec, value) {
     }
 
     /*  execute the object selection  */
-    return (
-          arguments.length === 2
-        ? select_execute(obj, path)
+    return ( arguments.length === 2 ?
+        select_execute(obj, path)
         : select_execute(obj, path, value)
     )
 }

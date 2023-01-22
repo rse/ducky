@@ -22,7 +22,7 @@
 **  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-var select_compile = function (spec) {
+const select_compile = function (spec) {
     /*  result and state variables  */
     let path = []
     let pos = 0

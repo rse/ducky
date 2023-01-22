@@ -25,7 +25,7 @@
 import { registry } from "./ducky-2-registry-1-data.js"
 
 /*  API function: register a type under a name  */
-var register = function (name, type) {
+const register = function (name, type) {
     /*  sanity check arguments  */
     if (arguments.length !== 2)
         throw new Error(`register: invalid number of arguments: ${arguments.length} (exactly 2 expected)`)
@@ -41,7 +41,7 @@ var register = function (name, type) {
 }
 
 /*  API function: unregister a type under a name  */
-var unregister = function (name) {
+const unregister = function (name) {
     /*  sanity check arguments  */
     if (arguments.length !== 1)
         throw new Error(`unregister: invalid number of arguments: ${arguments.length} (exactly 1 expected)`)
@@ -55,7 +55,7 @@ var unregister = function (name) {
 }
 
 /*  API function: check for registered type under a name  */
-var registered = function (name) {
+const registered = function (name) {
     /*  sanity check arguments  */
     if (arguments.length !== 1)
         throw new Error(`registered: invalid number of arguments: ${arguments.length} (exactly 1 expected)`)

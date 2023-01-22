@@ -30,7 +30,7 @@ import { validate_execute  } from "./ducky-4-validate-3-execute.js"
 let validate_cache = {}
 
 /*  API function: validate an arbitrary value against a validation DSL  */
-var validate = function (value, spec, errors) {
+const validate = function (value, spec, errors) {
     /*  sanity check arguments  */
     if (arguments.length < 2)
         throw new Error(`validate: invalid number of arguments: ${arguments.length} (minimum of 2 expected)`)
@@ -41,7 +41,7 @@ var validate = function (value, spec, errors) {
 
     /*  compile validation AST from specification
         or reuse cached pre-compiled validation AST  */
-    var ast = validate_cache[spec]
+    let ast = validate_cache[spec]
     if (typeof ast === "undefined") {
         ast = validate.compile(spec)
         validate_cache[spec] = ast
@@ -59,10 +59,10 @@ validate.compile = function (spec) {
         throw new Error(`validate: invalid specification argument: "${spec}" (string expected)`)
 
     /*  tokenize the specification string into a token stream */
-    var token = validate_tokenize(spec)
+    const token = validate_tokenize(spec)
 
     /*  parse the token stream into an AST  */
-    var ast = validate_parse.parse(token)
+    const ast = validate_parse.parse(token)
 
     return ast
 }

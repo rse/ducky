@@ -25,14 +25,14 @@
 import { registered } from "./ducky-2-registry-2-api.js"
 
 /*  provide a reasonable context information for error messages  */
-var errCtx = (path, msg) => {
+const errCtx = (path, msg) => {
     if (path === "")
         return `mismatch at root-level: ${msg}`
     else
         return `mismatch at path "${path}": ${msg}`
 }
 
-var validate_execute = {
+const validate_execute = {
     /*  validate specification (top-level)  */
     exec_spec (value, node, path, errors) {
         let valid = false
@@ -220,6 +220,7 @@ var validate_execute = {
     /*  validate custom JavaScript type  */
     exec_class (value, node, path, errors) {
         let type = registered(node.name)
+        /* eslint indent: off */
         let valid = (
                typeof value === "object"
             && (

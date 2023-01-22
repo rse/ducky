@@ -26,7 +26,7 @@ import { select }   from "./ducky-3-select-3-api.js"
 import { validate } from "./ducky-4-validate-4-api.js"
 
 /*  API function: flexible option handling  */
-var options = function (spec, input) {
+const options = function (spec, input) {
     let output = {}
 
     /*  prepare output by creating the structure and setting default values  */
@@ -52,7 +52,8 @@ var options = function (spec, input) {
                     "(expected string type)")
 
             /*  create parent structure in output  */
-            let out = output, i = 0
+            let out = output
+            let i = 0
             while (i < path.length - 1) {
                 if (typeof out[path[i]] !== "object")
                     out[path[i]] = {}

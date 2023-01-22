@@ -23,7 +23,7 @@
 */
 
 /*  execute object selection  */
-var select_execute = function (obj, path) {
+const select_execute = function (obj, path) {
     /*  handle special case of empty path */
     if (path.length === 0) {
         if (arguments.length === 3)

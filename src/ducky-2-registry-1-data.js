@@ -23,10 +23,10 @@
 */
 
 /*  internal type registry  */
-var registry = {}
+const registry = {}
 
 /*  pre-fill type registry with JavaScript standard types  */
-let std_types = [
+const std_types = [
     "Object",  "Boolean", "Number",  "String",  "Function",
     "RegExp",  "Array",   "Date",    "Error",
     "Set",     "Map",     "WeakMap", "Promise", "Proxy", "Iterator"

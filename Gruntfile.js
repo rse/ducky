@@ -23,10 +23,10 @@
 */
 
 module.exports = function (grunt) {
-    grunt.loadNpmTasks("grunt-contrib-clean");
-    grunt.loadNpmTasks("grunt-mocha-test");
-    grunt.loadNpmTasks("grunt-browserify");
-    grunt.loadNpmTasks("grunt-eslint");
+    grunt.loadNpmTasks("grunt-contrib-clean")
+    grunt.loadNpmTasks("grunt-mocha-test")
+    grunt.loadNpmTasks("grunt-browserify")
+    grunt.loadNpmTasks("grunt-eslint")
 
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
@@ -38,12 +38,14 @@ module.exports = function (grunt) {
                 },
                 options: {
                     transform: [
-                        [ "browserify-replace", { replace: [
-                            { from: /\$major/g, to: "<%= version.major %>" },
-                            { from: /\$minor/g, to: "<%= version.minor %>" },
-                            { from: /\$micro/g, to: "<%= version.micro %>" },
-                            { from: /\$date/g,  to: "<%= version.date  %>" }
-                        ]}],
+                        [ "browserify-replace", {
+                            replace: [
+                                { from: /\$major/g, to: "<%= version.major %>" },
+                                { from: /\$minor/g, to: "<%= version.minor %>" },
+                                { from: /\$micro/g, to: "<%= version.micro %>" },
+                                { from: /\$date/g,  to: "<%= version.date  %>" }
+                            ]
+                        }],
                         [ "babelify", {
                             presets: [
                                 [ "@babel/preset-env", {
@@ -71,12 +73,14 @@ module.exports = function (grunt) {
                 },
                 options: {
                     transform: [
-                        [ "browserify-replace", { replace: [
-                            { from: /\$major/g, to: "<%= version.major %>" },
-                            { from: /\$minor/g, to: "<%= version.minor %>" },
-                            { from: /\$micro/g, to: "<%= version.micro %>" },
-                            { from: /\$date/g,  to: "<%= version.date  %>" }
-                        ]}],
+                        [ "browserify-replace", {
+                            replace: [
+                                { from: /\$major/g, to: "<%= version.major %>" },
+                                { from: /\$minor/g, to: "<%= version.minor %>" },
+                                { from: /\$micro/g, to: "<%= version.micro %>" },
+                                { from: /\$date/g,  to: "<%= version.date  %>" }
+                            ]
+                        }],
                         [ "babelify", {
                             presets: [
                                 [ "@babel/preset-env", {
@@ -100,7 +104,7 @@ module.exports = function (grunt) {
         },
         eslint: {
             options: {
-                configFile: "eslint.json"
+                overrideConfigFile: "eslint.yaml"
             },
             gruntfile:  [ "Gruntfile.js" ],
             "ducky": [ "src/**/*.js" ]
@@ -117,8 +121,8 @@ module.exports = function (grunt) {
             clean:     [ "lib/*", "lib" ],
             distclean: [ "node_modules" ]
         }
-    });
+    })
 
-    grunt.registerTask("default", [ "eslint", "browserify", "mochaTest" ]);
-};
+    grunt.registerTask("default", [ "eslint", "browserify", "mochaTest" ])
+}
 

@@ -56,9 +56,9 @@ let params_check_validity = function (func, param, value, valid, what) {
 }
 
 /*  API function: flexible parameter handling  */
-var params = function (func, args, spec) {
+const params = function (func, args, spec) {
     /*  start with a fresh parameter object  */
-    var params = {}
+    const params = {}
 
     /*  handle parameter defaults  */
     let name
