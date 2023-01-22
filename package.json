@@ -2,7 +2,7 @@
     "name":        "ducky",
     "homepage":    "http://duckyjs.com/",
     "description": "Duck-Typed Value Handling for JavaScript",
-    "version":     "2.8.0",
+    "version":     "2.8.1",
     "license":     "MIT",
     "author": {
         "name":    "Dr. Ralf S. Engelschall",
