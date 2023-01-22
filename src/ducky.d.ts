@@ -31,14 +31,14 @@ declare module Ducky {
             date:  number
         }
         validate: {
-            (obj: any, spec: string): boolean
-            compile(spec: string): Object
-            execute(obj: any, ast: Object): boolean
+            (obj: any, spec: string, errors?: string[]): boolean
+            compile(spec: string): any
+            execute(obj: any, ast: any, errors?: string[]): boolean
         }
         select: {
-            (obj: Object, spec: string, value?: any): any
+            (obj: any, spec: string, value?: any): any
             compile(spec: string): string[]
-            execute(obj: Object, path: string[]): any
+            execute(obj: any, path: string[]): any
         }
         params(
             name: string,
@@ -51,7 +51,7 @@ declare module Ducky {
                     valid?: any
                 }
             }
-        ): Object
+        ): any
     }
     const ducky: Ducky
 }
