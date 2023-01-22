@@ -22,36 +22,39 @@
 **  SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
-interface ducky_api {
-    version: {
-        major: number;
-        minor: number;
-        micro: number;
-        date:  number;
-    };
-    validate: {
-        (obj: any, spec: string): boolean;
-        compile(spec: string): Object;
-        execute(obj: any, ast: Object): boolean;
-    };
-    select: {
-        (obj: Object, spec: string, value?: any): any;
-        compile(spec: string): string[];
-        execute(obj: Object, path: string[]): any;
-    };
-    params(
-        name: string,
-        args: any[],
-        spec: {
-            [key: string]: {
-                pos?: number;
-                req?: boolean;
-                def?: any;
-                valid?: any;
-            }
+declare module Ducky {
+    interface Ducky {
+        version: {
+            major: number
+            minor: number
+            micro: number
+            date:  number
         }
-    ): Object;
+        validate: {
+            (obj: any, spec: string): boolean
+            compile(spec: string): Object
+            execute(obj: any, ast: Object): boolean
+        }
+        select: {
+            (obj: Object, spec: string, value?: any): any
+            compile(spec: string): string[]
+            execute(obj: Object, path: string[]): any
+        }
+        params(
+            name: string,
+            args: any[],
+            spec: {
+                [key: string]: {
+                    pos?: number
+                    req?: boolean
+                    def?: any
+                    valid?: any
+                }
+            }
+        ): Object
+    }
+    const ducky: Ducky
 }
 
-declare var ducky: ducky_api;
+export = Ducky.ducky
 
