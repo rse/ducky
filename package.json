@@ -37,7 +37,7 @@
         "chai-fuzzy":             "1.6.1",
         "underscore":             "1.13.6",
         "babelify":               "10.0.0",
-        "@babel/core":            "7.20.12",
+        "@babel/core":            "7.29.6",
         "@babel/preset-env":      "7.20.2",
         "uglifyify":              "5.0.2",
         "browserify-replace":     "1.1.0",
